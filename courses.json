@@ -1,0 +1,197 @@
+[
+  {
+    "description": "object oriented programming",
+    "students": [
+      {
+        "role": "student",
+        "enrolledCourses": [],
+        "progress": [],
+        "userId": 9443,
+        "email": "jzeyadelsherbiny@gmail.com",
+        "passwordHash": "14fba8eccf286f250062baccfbe878f563aea6bd99952319b865bb84af881c94",
+        "username": "joudyZ"
+      },
+      {
+        "role": "student",
+        "enrolledCourses": [],
+        "progress": [],
+        "userId": 9543,
+        "email": "zeyadelsherb@gmail.com",
+        "passwordHash": "d07c00f0719d2df22ba46903dccbd454cc221e9fcec6556773fddb144a6e48e0",
+        "username": "zeyad"
+      },
+      {
+        "role": "student",
+        "enrolledCourses": [99999],
+        "progress": [],
+        "userId": 9446,
+        "email": "f@gml.co",
+        "passwordHash": "8354e0dabc25b87156b357e42a0cfd087599b4300869c2e14a33790f9022d410",
+        "username": "farida"
+      },
+      {
+        "role": "student",
+        "enrolledCourses": [99999],
+        "progress": [],
+        "userId": 9451,
+        "email": "j@.com",
+        "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
+        "username": "jjj"
+      },
+      {
+        "role": "student",
+        "enrolledCourses": [
+          10,
+          99999
+        ],
+        "progress": [{
+          "progress": 2,
+          "courseId": 10
+        }],
+        "userId": 9453,
+        "email": "r@gmail.com",
+        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "username": "rana"
+      },
+      {
+        "role": "student",
+        "enrolledCourses": [
+          10,
+          99999
+        ],
+        "progress": [],
+        "userId": 9454,
+        "email": "m0@gmail.com",
+        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "username": "mohamed"
+      }
+    ],
+    "title": "NEW TEST COURSE TITLE",
+    "courseId": 99999,
+    "instructorID": 919191,
+    "lessons": [{
+      "lessonId": 1,
+      "title": "Introduction",
+      "content": "Welcome",
+      "isComplete": true
+    }]
+  },
+  {
+    "description": "algebra",
+    "students": [{
+      "role": "student",
+      "enrolledCourses": [
+        9811,
+        99999,
+        500,
+        3333
+      ],
+      "progress": [{
+        "progress": 3,
+        "courseId": 99999
+      }],
+      "userId": 9448,
+      "email": "m@m.co",
+      "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+      "username": "malak"
+    }],
+    "title": "math",
+    "courseId": 3333,
+    "instructorID": 2
+  },
+  {
+    "description": "linear algebraaaa",
+    "students": [{
+      "role": "student",
+      "enrolledCourses": [10],
+      "progress": [],
+      "userId": 9454,
+      "email": "m0@gmail.com",
+      "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+      "username": "mohamed"
+    }],
+    "title": "linear",
+    "courseId": 10,
+    "instructorID": 9452,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "matrix ops",
+        "content": "add,subtract,...",
+        "isComplete": true
+      },
+      {
+        "lessonId": 2,
+        "title": "matrix inverse",
+        "content": "inv",
+        "isComplete": true
+      }
+    ]
+  },
+  {
+    "description": "signals and systems.....",
+    "students": [
+      {
+        "role": "student",
+        "enrolledCourses": [
+          10,
+          99999,
+          12
+        ],
+        "progress": [
+          {
+            "progress": 1,
+            "courseId": 99999
+          },
+          {
+            "progress": 2,
+            "courseId": 10
+          }
+        ],
+        "userId": 9454,
+        "email": "m0@gmail.com",
+        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "username": "mohamed"
+      },
+      {
+        "role": "student",
+        "enrolledCourses": [
+          10,
+          99999,
+          12
+        ],
+        "progress": [
+          {
+            "progress": 2,
+            "courseId": 10
+          },
+          {
+            "progress": 1,
+            "courseId": 99999
+          }
+        ],
+        "userId": 9453,
+        "email": "r@gmail.com",
+        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "username": "rana"
+      }
+    ],
+    "title": "signals",
+    "courseId": 12,
+    "instructorID": 9452,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "lesson 1",
+        "content": "signal classifications",
+        "isComplete": true
+      },
+      {
+        "lessonId": 2,
+        "title": "lesson 2",
+        "content": "singularity signals imp",
+        "isComplete": true
+      }
+    ]
+  }
+]
