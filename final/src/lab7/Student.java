@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Student extends User {
 
     private ArrayList<Integer> enrolledCourses;
-    private ArrayList<CourseProgress> progress;
+    private ArrayList<LessonProgress> progress;
 
     public Student(int userId, String username, String email, String password) {
         super(userId, username, email, password, "student");
@@ -28,27 +28,13 @@ public class Student extends User {
         this.enrolledCourses = enrolledCourses;
     }
 
-    public ArrayList<CourseProgress> getProgress() {
+    public ArrayList<LessonProgress> getProgress() {
         return progress;
     }
 
-    public void setProgress(ArrayList<CourseProgress> progress) {
+    public void setProgress(ArrayList<LessonProgress> progress) {
         this.progress = progress;
     }
-
-    
-    public CourseProgress getOrCreateCourseProgress(int courseId) {
-        for (CourseProgress cp : progress) {
-            if (cp.getCourseID() == courseId) {
-                return cp;
-            }
-        }
-
-        CourseProgress newProgress = new CourseProgress(courseId, 0);
-        progress.add(newProgress);
-        return newProgress;
-    }
-
     public ArrayList<Course> availableCourses() throws IOException {
         return JsonDatabaseManager.loadCourses();
     }

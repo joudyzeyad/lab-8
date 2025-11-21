@@ -20,6 +20,13 @@ public class StudentManager {
             return false;
         } else {
             s.getEnrolledCourses().add(courseID);
+            ArrayList<LessonProgress> progress = s.getProgress();
+            ArrayList<Lesson> temp = this.lessonList(courseID);
+            int i;
+            for(i=0 ; i< temp.size();++i){
+                progress.add(new LessonProgress(courseID,temp.get(i).getLessonId()));
+            }
+            s.setProgress(progress);
             updateStudentInJson();
             updateCourseEnrollment(courseID);
             return true;
@@ -47,64 +54,55 @@ public class StudentManager {
         return new ArrayList<>();
     }
 
-    public CourseProgress getProgressForCourse(int courseId) {
-        for (CourseProgress cp : s.getProgress()) {
-            if (cp.getCourseID() == courseId) {
-                return cp;
-            }
-        }
-        return null;
-    }
 
     public boolean markLessonCompleted(int courseId, int lessonId) throws IOException {
-
-        int totalLessons = lessonList(courseId).size();
-        if (totalLessons == 0) return false;
-
-        CourseProgress courseProgress = null;
-
-        for (CourseProgress p : s.getProgress()) {
-            if (p.getCourseID() == courseId) {
-                courseProgress = p;
-                break;
-            }
-        }
-
-        if (courseProgress == null) {
-            courseProgress = new CourseProgress(courseId, 0);
-            s.getProgress().add(courseProgress);
-        }
-
-        int completed = courseProgress.getCompletedLessons();
-
-        if (completed >= totalLessons) {
-            return false; 
-        }
-
-        courseProgress.setCompletedLessons(completed + 1);
-
-        ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
-
-        for (Course course : courses) {
-            if (course.getCourseID() == courseId) {
-                for (Lesson lesson : course.getLessons()) {
-                    if (lesson.getLessonId() == lessonId) {
-                        lesson.setIsComplete(true);
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-
-        JsonDatabaseManager.saveCourse(courses);
-
-        updateStudentInJson();
-
-        return true;
+      ArrayList<LessonProgress> temp = s.getProgress();
+      int i;
+      boolean flag = false;
+      for(i=0;i<temp.size();++i){
+         if(temp.get(i).getcID() == courseId && temp.get(i).getlID() == lessonId){
+               if(!temp.get(i).isIsComplete()){
+                    temp.get(i).setIsComplete(true);
+                    flag = true;
+               }
+         }
+      }
+      this.updateStudentInJson();
+       return flag; 
     }
-
-    
+    public float getProgressForCourse(int cId){
+       int completed=0;
+       int totalSize = 0;
+       ArrayList<LessonProgress> temp = s.getProgress();
+       int i;
+       for(i=0;i<temp.size();++i){
+         if(temp.get(i).getcID() == cId){
+             ++totalSize;
+             if(temp.get(i).isIsComplete() == true)
+                 ++completed;
+         }
+    }
+    return (completed/totalSize)*100;
+  }
+    public ArrayList<LessonProgress> getLessonProgressbyId(int cId){
+          ArrayList<LessonProgress> main = s.getProgress();
+          ArrayList<LessonProgress> temp = new ArrayList<>();
+          int i;
+          for(i=0;i<main.size();++i){
+              if(main.get(i).getcID()== cId)
+                  temp.add(main.get(i));
+          }
+          return temp;
+    }
+    public boolean isComplete(int cId, int lId){
+        ArrayList<LessonProgress> temp = this.getLessonProgressbyId(cId);
+        int i;
+        boolean flag = false;
+        for(i=0;i<temp.size();++i)
+            if(temp.get(i).getlID()== lId)
+               flag =  temp.get(i).isIsComplete();
+        return flag;
+     }
     private void updateStudentInJson() throws IOException {
         ArrayList<User> users = JsonDatabaseManager.loadUsers();
 

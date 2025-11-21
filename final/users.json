@@ -1,26 +1,5 @@
 [
   {
-    "role": "student",
-    "enrolledCourses": [
-      10,
-      20
-    ],
-    "progress": [
-      {
-        "progress": 2,
-        "courseId": 10
-      },
-      {
-        "progress": 5,
-        "courseId": 20
-      }
-    ],
-    "userId": 1,
-    "email": "m@gmail.com",
-    "passwordHash": "4528bd8320d9d8df020241725490203c1a31564ade703329e043ab60ec1ada50",
-    "username": "TEST_USERNAME"
-  },
-  {
     "role": "instructor",
     "createdCourses": [10],
     "userId": 2,
@@ -30,185 +9,36 @@
   },
   {
     "role": "student",
-    "enrolledCourses": [
-      1,
-      3
-    ],
-    "progress": [
-      {
-        "progress": 2,
-        "courseId": 1
-      },
-      {
-        "progress": 0,
-        "courseId": 3
-      }
-    ],
-    "userId": 9443,
-    "email": "jzeyadelsherbiny@gmail.com",
-    "passwordHash": "bcf2d21633a9809784c221be6c93954eace96c550f0204b2b3a972c913fe2951",
-    "username": "Joudy"
-  },
-  {
-    "role": "student",
-    "enrolledCourses": [],
-    "progress": [],
-    "userId": 9444,
-    "email": "ranaadel@gmail.com",
-    "passwordHash": "49dc52e6bf2abe5ef6e2bb5b0f1ee2d765b922ae6cc8b95d39dc06c21c848f8c",
-    "username": "Rana "
-  },
-  {
-    "role": "student",
-    "enrolledCourses": [500],
-    "progress": [],
-    "userId": 9445,
-    "email": "amr8856@gmail.com",
-    "passwordHash": "5b1feab3b3db889811317184f5275706f10d3f728ad357041bc91e6e55d0eb91",
-    "username": "Amr "
-  },
-  {
-    "role": "student",
-    "enrolledCourses": [
-      99999,
-      9822,
-      500
-    ],
+    "enrolledCourses": [99999],
     "progress": [{
-      "progress": 2,
+      "Complete": true,
+      "lessonId": 1,
       "courseId": 99999
     }],
-    "userId": 9446,
-    "email": "f@gml.co",
-    "passwordHash": "8354e0dabc25b87156b357e42a0cfd087599b4300869c2e14a33790f9022d410",
-    "username": "farida"
-  },
-  {
-    "role": "student",
-    "enrolledCourses": [],
-    "progress": [],
-    "userId": 9446,
-    "email": "f@gml.co",
-    "passwordHash": "8354e0dabc25b87156b357e42a0cfd087599b4300869c2e14a33790f9022d410",
-    "username": "farida"
-  },
-  {
-    "role": "instructor",
-    "createdCourses": [],
-    "userId": 9447,
-    "email": "m@gml.co",
-    "passwordHash": "6087a23121ec3897993536cf0ad255a42f5ccef3689aab626b750360461d6b52",
-    "username": "mal"
-  },
-  {
-    "role": "student",
-    "enrolledCourses": [
-      9811,
-      99999,
-      500,
-      3333
-    ],
-    "progress": [{
-      "progress": 3,
-      "courseId": 99999
-    }],
-    "userId": 9448,
-    "email": "m@m.co",
-    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "username": "malak"
-  },
-  {
-    "role": "instructor",
-    "createdCourses": [],
-    "userId": 9449,
-    "email": "m@m.com",
-    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "username": "m"
-  },
-  {
-    "role": "instructor",
-    "createdCourses": [],
-    "userId": 9450,
+    "userId": 3,
     "email": "j@gml.com",
-    "passwordHash": "cc0b81d61df81ba320108c8127fd93ed0cf94fe48e26b339d37696842480ae7e",
-    "username": "joudy"
+    "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
+    "username": "jj"
   },
   {
     "role": "student",
-    "enrolledCourses": [
-      99999,
-      3333
-    ],
-    "progress": [],
-    "userId": 9451,
-    "email": "j@.com",
-    "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
-    "username": "jjj"
+    "enrolledCourses": [99999],
+    "progress": [{
+      "Complete": true,
+      "lessonId": 1,
+      "courseId": 99999
+    }],
+    "userId": 4,
+    "email": "y@.",
+    "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
+    "username": "yy"
   },
   {
     "role": "instructor",
-    "createdCourses": [
-      10,
-      10,
-      11,
-      11,
-      12
-    ],
-    "userId": 9452,
-    "email": "j@gmail.com",
-    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "username": "jana"
-  },
-  {
-    "role": "student",
-    "enrolledCourses": [
-      10,
-      99999,
-      12
-    ],
-    "progress": [
-      {
-        "progress": 2,
-        "courseId": 10
-      },
-      {
-        "progress": 1,
-        "courseId": 99999
-      },
-      {
-        "progress": 1,
-        "courseId": 12
-      }
-    ],
-    "userId": 9453,
-    "email": "r@gmail.com",
-    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "username": "rana"
-  },
-  {
-    "role": "student",
-    "enrolledCourses": [
-      10,
-      99999,
-      12
-    ],
-    "progress": [
-      {
-        "progress": 1,
-        "courseId": 99999
-      },
-      {
-        "progress": 2,
-        "courseId": 10
-      },
-      {
-        "progress": 2,
-        "courseId": 12
-      }
-    ],
-    "userId": 9454,
-    "email": "m0@gmail.com",
-    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "username": "mohamed"
+    "createdCourses": [1111],
+    "userId": 5,
+    "email": "j@.",
+    "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
+    "username": "jou"
   }
 ]

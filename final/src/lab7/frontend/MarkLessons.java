@@ -37,10 +37,10 @@ public class MarkLessons extends javax.swing.JPanel {
          model.setRowCount(0);
 
         // Get student progress for this course
-        CourseProgress cp = sm.getProgressForCourse(courseID);
+        ArrayList<LessonProgress> cp = sm.getLessonProgressbyId(courseID);
 
         for (Lesson lesson : lessons) {
-            boolean completed = (cp != null && cp.getCompletedLessons() >= lesson.getLessonId());
+            boolean completed = sm.isComplete(courseID,lesson.getLessonId());
             model.addRow(new Object[]{
                 lesson.getTitle(),
                 lesson.getLessonId(),
