@@ -29,6 +29,20 @@ public class ProgressManager {
     float percent = (completed * 100f) / s.size();
    return percent ;      
 }
-
+  public static float quizAverage(int cId, int lId) throws IOException{
+        ArrayList<Course> c = JsonDatabaseManager.loadCourses();
+        ArrayList<Student> s= null;
+        for(int i =0;i<c.size();++i){
+            if(c.get(i).getCourseID() == cId)
+                s = c.get(i).getStudents();
+    }
+    float total = 0;
+    for(Student temp : s){
+        StudentManager m = new StudentManager(temp);
+        total = total + m.maxScore(lId);
+    }
+    float average = total/s.size();
+    return average;
+  }
 
 }
