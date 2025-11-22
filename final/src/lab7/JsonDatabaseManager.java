@@ -90,12 +90,13 @@ public class JsonDatabaseManager {
          s.setEnrolledCourses(enrolledCourses);
         }
         if(obj.has("progress")){
-         JSONArray p = obj.getJSONArray("progress");
-        ArrayList<CourseProgress> cprogress = new ArrayList<>();
+        JSONArray p = obj.getJSONArray("progress");
+        ArrayList<LessonProgress> cprogress = new ArrayList<>();
         for(i=0;i<p.length();++i){
             int cid = p.getJSONObject(i).getInt("courseId");
-            int progress = p.getJSONObject(i).getInt("progress");
-            CourseProgress temp = new CourseProgress(cid,progress);
+            int lId = p.getJSONObject(i).getInt("lessonId");
+            boolean comp = p.getJSONObject(i).getBoolean("Complete");
+            LessonProgress temp = new LessonProgress(cid,lId,comp);
             cprogress.add(temp);
         }
         s.setProgress(cprogress);
@@ -122,9 +123,7 @@ public class JsonDatabaseManager {
          int id = obj.getInt("lessonId");
          String title = obj.getString("title");
          String content = obj.getString("content");
-         boolean complete = (boolean)obj.getBoolean("isComplete");
          Lesson l = new Lesson(id,title,content);
-         l.setIsComplete(complete);
          if(obj.has("resources")){
            JSONArray arr = obj.getJSONArray("resources");
            int i;
@@ -146,12 +145,13 @@ public class JsonDatabaseManager {
           Student s = (Student) u;
           obj.put("enrolledCourses",new JSONArray(s.getEnrolledCourses()));
           int i;
-          ArrayList<CourseProgress> temp = s.getProgress();
+          ArrayList<LessonProgress> temp = s.getProgress();
           JSONArray temparr = new JSONArray();
-          for(i=0;i<temp.size();++i){
+           for(i=0;i<temp.size();++i){
              JSONObject prog = new JSONObject();
-             prog.put("courseId",temp.get(i).getCourseID());
-             prog.put("progress",temp.get(i).getCompletedLessons());
+             prog.put("courseId",temp.get(i).getcID());
+             prog.put("lessonId",temp.get(i).getlID());
+             prog.put("Complete", temp.get(i).isIsComplete());
              temparr.put(prog);
           }
           obj.put("progress", temparr);
@@ -178,7 +178,6 @@ public class JsonDatabaseManager {
              lesson.put("lessonId",temp.get(i).getLessonId());
              lesson.put("title", temp.get(i).getTitle());
              lesson.put("content", temp.get(i).getContent());
-             lesson.put("isComplete",temp.get(i).isComplete());
              ArrayList<String> res = temp.get(i).getResources();
              if(res != null && !res.isEmpty())
                  for(i=0;i<temp.get(i).getResources().size();++i)
