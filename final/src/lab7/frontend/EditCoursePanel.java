@@ -250,6 +250,7 @@ public void loadCourse(Course c)
     courseTitleField.setText(c.getTitle());
     descriptionField.setText(c.getDescription());
     instructorIDField.setText(String.valueOf(c.getInstructorID()));
+    statusField.setText(c.getStatus());
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
