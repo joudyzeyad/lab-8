@@ -125,7 +125,7 @@ public class AddLessonFrame extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(titleButton)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Co)
                             .addComponent(contentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -152,7 +152,7 @@ public class AddLessonFrame extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerforme
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
 
     if (idField.getText().isEmpty() || titleTextField.getText().isEmpty() 
             || contentField.getText().isEmpty() ) {
@@ -206,7 +206,7 @@ public class AddLessonFrame extends javax.swing.JPanel {
             
            
          
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }                                          
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

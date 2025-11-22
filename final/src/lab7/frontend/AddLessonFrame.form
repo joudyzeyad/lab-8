@@ -75,9 +75,9 @@
                   <Group type="102" attributes="0">
                       <Component id="titleButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Co" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="contentField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="contentField" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="titleTextField" min="-2" max="-2" attributes="0"/>

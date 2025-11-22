@@ -2,12 +2,16 @@ package lab7;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import lab7.*;
 
 public class Student extends User {
 
     private ArrayList<Integer> enrolledCourses;
     private ArrayList<LessonProgress> progress;
     private ArrayList<QuizAttempt> quizAttempts;
+    private ArrayList<Certificate> certificates;
+
+    
     
     public Student(int userId, String username, String email, String password) {
         super(userId, username, email, password, "student");
@@ -39,6 +43,7 @@ public class Student extends User {
         this.progress = progress;
     }
 
+   
     public ArrayList<Course> availableCourses() throws IOException {
         return JsonDatabaseManager.loadCourses();
     }
@@ -50,5 +55,27 @@ public class Student extends User {
     public void setQuizAttempts(ArrayList<QuizAttempt> quizAttempts) {
         this.quizAttempts = quizAttempts;
     }
+    public ArrayList<Certificate> getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(ArrayList<Certificate> certificates) {
+        this.certificates = certificates;
+    }
+
+     public void addCertificate(Certificate c) {
+        certificates.add(c);
+    }
+     
+     public boolean hasPassedLesson(int lessonId) {
+    for (QuizAttempt qa : quizAttempts) {
+        if (qa.getLessonID() == lessonId && qa.isPassed()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 }

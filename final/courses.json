@@ -4,6 +4,8 @@
     "students": [
       {
         "role": "student",
+        "quizAttempts": [],
+        "certificates": [],
         "enrolledCourses": [99999],
         "progress": [{
           "Complete": false,
@@ -17,6 +19,8 @@
       },
       {
         "role": "student",
+        "quizAttempts": [],
+        "certificates": [],
         "enrolledCourses": [],
         "progress": [],
         "userId": 4,
@@ -26,6 +30,8 @@
       },
       {
         "role": "student",
+        "quizAttempts": [],
+        "certificates": [],
         "enrolledCourses": [99999],
         "progress": [{
           "Complete": false,
@@ -36,6 +42,21 @@
         "email": "y@.",
         "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
         "username": "yy"
+      },
+      {
+        "role": "student",
+        "quizAttempts": [],
+        "certificates": [],
+        "enrolledCourses": [99999],
+        "progress": [{
+          "Complete": false,
+          "lessonId": 1,
+          "courseId": 99999
+        }],
+        "userId": 9458,
+        "email": "m@m.com",
+        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "username": "malak"
       }
     ],
     "title": "NEW TEST COURSE TITLE",

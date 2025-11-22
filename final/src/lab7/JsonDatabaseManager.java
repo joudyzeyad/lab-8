@@ -1,8 +1,7 @@
 package lab7;
 
 
-import lab7.Instructor;
-import lab7.Course;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,105 +10,109 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.json.JSONObject;
 import org.json.JSONArray;
-
+import lab7.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Joudy
  */
 public class JsonDatabaseManager {
-    public static ArrayList<Course> loadCourses() throws IOException{
-           ArrayList<Course> c = new ArrayList<Course>();
-           String lines = new String(Files.readAllBytes(Paths.get("courses.json")));
-           JSONArray arr = new JSONArray(lines);
-           int i;
-           for(i=0;i<arr.length();++i){
-           JSONObject obj = arr.getJSONObject(i);
-           Course course = jsonToCourse(obj);
-           c.add(course);
-           }
-          return c; 
-    } 
-    public static ArrayList<User> loadUsers() throws IOException{
-          ArrayList<User> u = new ArrayList<User>();
-          String lines = new String(Files.readAllBytes(Paths.get("users.json")));
-          JSONArray arr = new JSONArray(lines);
-          int i;
-          for(i=0;i<arr.length();++i){
-             JSONObject obj = arr.getJSONObject(i);
-             String role = obj.getString("role");
-            if(role.equalsIgnoreCase("student")){
+
+    public static ArrayList<Course> loadCourses() throws IOException {
+        ArrayList<Course> c = new ArrayList<Course>();
+        String lines = new String(Files.readAllBytes(Paths.get("courses.json")));
+        JSONArray arr = new JSONArray(lines);
+        int i;
+        for (i = 0; i < arr.length(); ++i) {
+            JSONObject obj = arr.getJSONObject(i);
+            Course course = jsonToCourse(obj);
+            c.add(course);
+        }
+        return c;
+    }
+
+    public static ArrayList<User> loadUsers() throws IOException {
+        ArrayList<User> u = new ArrayList<User>();
+        String lines = new String(Files.readAllBytes(Paths.get("users.json")));
+        JSONArray arr = new JSONArray(lines);
+        int i;
+        for (i = 0; i < arr.length(); ++i) {
+            JSONObject obj = arr.getJSONObject(i);
+            String role = obj.getString("role");
+            if (role.equalsIgnoreCase("student")) {
                 Student s = jsonToStudent(obj);
-                u.add(s);}
-            else if(role.equalsIgnoreCase("instructor")){
+                u.add(s);
+            } else if (role.equalsIgnoreCase("instructor")) {
                 Instructor ins = jsonToInstructor(obj);
                 u.add(ins);
+            } else {
+                Admin adm = jsonToAdmin(obj);
+                u.add(adm);
             }
-            else { Admin adm=jsonToAdmin(obj);
-                   u.add(adm);
-            }
-          }
-          return u;
+        }
+        return u;
     }
-    public static Course jsonToCourse(JSONObject obj){
+
+    public static Course jsonToCourse(JSONObject obj) {
         int cID = obj.getInt("courseId");
         int instID = obj.getInt("instructorID");
         String title = obj.getString("title");
         String description = obj.getString("description");
-        String status=obj.getString("status");
-        Course c = new Course(cID,instID,title,description,status);
+        String status = obj.getString("status");
+        Course c = new Course(cID, instID, title, description, status);
         int i;
-        if(obj.has("students")){
-          JSONArray sArr = obj.getJSONArray("students");
-          for(i=0;i<sArr.length();++i){
-             c.addStudent((Student) jsonToStudent(sArr.getJSONObject(i)));
-           }
+        if (obj.has("students")) {
+            JSONArray sArr = obj.getJSONArray("students");
+            for (i = 0; i < sArr.length(); ++i) {
+                c.addStudent((Student) jsonToStudent(sArr.getJSONObject(i)));
+            }
         }
-        if(obj.has("lessons")){
-          JSONArray lArr = obj.getJSONArray("lessons");
-          for(i=0;i<lArr.length();++i){
-             c.addLesson(jsonToLesson(lArr.getJSONObject(i)));
-           }
+        if (obj.has("lessons")) {
+            JSONArray lArr = obj.getJSONArray("lessons");
+            for (i = 0; i < lArr.length(); ++i) {
+                c.addLesson(jsonToLesson(lArr.getJSONObject(i)));
+            }
         }
 
         return c;
     }
+
     private static Student jsonToStudent(JSONObject obj) {
         int id = obj.getInt("userId");
         String username = obj.getString("username");
         String email = obj.getString("email");
         String passwordHash = obj.getString("passwordHash");
         int i;
-        Student s = new Student(id,username,email,passwordHash,true);
-        if(obj.has("enrolledCourses")){
-        JSONArray ec = obj.getJSONArray("enrolledCourses");
-        ArrayList<Integer> enrolledCourses = new ArrayList<>();
-        for(i=0;i<ec.length();++i)
-            enrolledCourses.add(ec.getInt(i));
-         s.setEnrolledCourses(enrolledCourses);
+        Student s = new Student(id, username, email, passwordHash, true);
+        if (obj.has("enrolledCourses")) {
+            JSONArray ec = obj.getJSONArray("enrolledCourses");
+            ArrayList<Integer> enrolledCourses = new ArrayList<>();
+            for (i = 0; i < ec.length(); ++i) {
+                enrolledCourses.add(ec.getInt(i));
+            }
+            s.setEnrolledCourses(enrolledCourses);
         }
-        if(obj.has("progress")){
-        JSONArray p = obj.getJSONArray("progress");
-        ArrayList<LessonProgress> cprogress = new ArrayList<>();
-        for(i=0;i<p.length();++i){
-            int cid = p.getJSONObject(i).getInt("courseId");
-            int lId = p.getJSONObject(i).getInt("lessonId");
-            boolean comp = p.getJSONObject(i).getBoolean("Complete");
-            LessonProgress temp = new LessonProgress(cid,lId,comp);
-            cprogress.add(temp);
+        if (obj.has("progress")) {
+            JSONArray p = obj.getJSONArray("progress");
+            ArrayList<LessonProgress> cprogress = new ArrayList<>();
+            for (i = 0; i < p.length(); ++i) {
+                int cid = p.getJSONObject(i).getInt("courseId");
+                int lId = p.getJSONObject(i).getInt("lessonId");
+                boolean comp = p.getJSONObject(i).getBoolean("Complete");
+                LessonProgress temp = new LessonProgress(cid, lId, comp);
+                cprogress.add(temp);
+            }
+            s.setProgress(cprogress);
         }
-        s.setProgress(cprogress);
-        }
-        
+
         if (obj.has("quizAttempts")) {
             JSONArray qa = obj.getJSONArray("quizAttempts");
             ArrayList<QuizAttempt> attempts = new ArrayList<>();
-            for (i = 0 ; i < qa.length() ; ++i) {
+            for (i = 0; i < qa.length(); ++i) {
                 JSONObject a = qa.getJSONObject(i);
                 int lessonID = a.getInt("lessonID");
                 int score = a.getInt("score");
@@ -120,221 +123,272 @@ public class JsonDatabaseManager {
             }
             s.setQuizAttempts(attempts);
         }
+        if (obj.has("certificates")) {
+            JSONArray certArr = obj.getJSONArray("certificates");
+            ArrayList<Certificate> certs = new ArrayList<>();
+            for (int j = 0; j < certArr.length(); j++) {
+                JSONObject cj = certArr.getJSONObject(j);
+                Certificate c = new Certificate(
+                        cj.getString("certificateId"),
+                        cj.getInt("studentId"),
+                        cj.getInt("courseId"),
+                        cj.getString("issueDate")
+                );
+                certs.add(c);
+            }
+            s.setCertificates(certs);
+        }
         return s;
-}
+    }
+
     private static Instructor jsonToInstructor(JSONObject obj) {
         int id = obj.getInt("userId");
         String username = obj.getString("username");
         String email = obj.getString("email");
         String passwordHash = obj.getString("passwordHash");
         int j;
-        Instructor i = new Instructor(id,username,email,passwordHash,true);
-        if(obj.has("createdCourses")){
-        JSONArray cc = obj.getJSONArray("createdCourses");
-        ArrayList<Integer> createdCourses = new ArrayList<>();
-        for(j=0;j<cc.length();++j)
-            createdCourses.add(cc.getInt(j));
-        i.setCreatedCourses(createdCourses);
+        Instructor i = new Instructor(id, username, email, passwordHash, true);
+        if (obj.has("createdCourses")) {
+            JSONArray cc = obj.getJSONArray("createdCourses");
+            ArrayList<Integer> createdCourses = new ArrayList<>();
+            for (j = 0; j < cc.length(); ++j) {
+                createdCourses.add(cc.getInt(j));
+            }
+            i.setCreatedCourses(createdCourses);
         }
         return i;
-}
-    public static Lesson jsonToLesson(JSONObject obj){
-         int id = obj.getInt("lessonId");
-         String title = obj.getString("title");
-         String content = obj.getString("content");
-         Lesson l = new Lesson(id,title,content);
-         if(obj.has("resources")){
-           JSONArray arr = obj.getJSONArray("resources");
-           int i;
-           for(i=0;i<arr.length();++i){
-              l.addResource(arr.getString(i));
-           }
-         }
-         
-         if (obj.has("quiz")) {
-             JSONObject qObj = obj.getJSONObject("quiz");
-             Quiz quiz = new Quiz();
-             if (qObj.has("maxAttempts")) {
-                 quiz.setMaxAttempts(qObj.getInt("maxAttempts"));
-             }
-             if (qObj.has("questions")) {
-                 JSONArray qArr = qObj.getJSONArray("questions");
-                 for (int qi = 0 ; qi < qArr.length() ; ++qi) {
-                     JSONObject qj = qArr.getJSONObject(qi);
-                     String questionText = qj.getString("question");
-                     ArrayList<String> options = new ArrayList<>();
-                     if (qj.has("options")) {
-                         JSONArray opts = qj.getJSONArray("options");
-                         for (int oi = 0 ; oi < opts.length() ; ++oi) {
-                             options.add(opts.getString(oi));
-                         }
-                     }
-                     int correct = qj.optInt("correctAns", 0);
-                     Question question = new Question(questionText, options, correct);
-                     quiz.addQuestion(question);
-                 }
-             }
-             l.setQuiz(quiz);
-         }
-         return l;
-    
     }
-    
-    
-    private static Admin jsonToAdmin(JSONObject obj)
-    {
+
+    public static Lesson jsonToLesson(JSONObject obj) {
+        int id = obj.getInt("lessonId");
+        String title = obj.getString("title");
+        String content = obj.getString("content");
+        Lesson l = new Lesson(id, title, content);
+        if (obj.has("resources")) {
+            JSONArray arr = obj.getJSONArray("resources");
+            int i;
+            for (i = 0; i < arr.length(); ++i) {
+                l.addResource(arr.getString(i));
+            }
+        }
+
+        if (obj.has("quiz")) {
+            JSONObject qObj = obj.getJSONObject("quiz");
+            Quiz quiz = new Quiz();
+            if (qObj.has("maxAttempts")) {
+                quiz.setMaxAttempts(qObj.getInt("maxAttempts"));
+            }
+            if (qObj.has("questions")) {
+                JSONArray qArr = qObj.getJSONArray("questions");
+                for (int qi = 0; qi < qArr.length(); ++qi) {
+                    JSONObject qj = qArr.getJSONObject(qi);
+                    String questionText = qj.getString("question");
+                    ArrayList<String> options = new ArrayList<>();
+                    if (qj.has("options")) {
+                        JSONArray opts = qj.getJSONArray("options");
+                        for (int oi = 0; oi < opts.length(); ++oi) {
+                            options.add(opts.getString(oi));
+                        }
+                    }
+                    int correct = qj.optInt("correctAns", 0);
+                    Question question = new Question(questionText, options, correct);
+                    quiz.addQuestion(question);
+                }
+            }
+            l.setQuiz(quiz);
+        }
+        return l;
+
+    }
+
+    private static Admin jsonToAdmin(JSONObject obj) {
         int id = obj.getInt("userId");
         String username = obj.getString("username");
         String email = obj.getString("email");
         String passwordHash = obj.getString("passwordHash");
-        Admin a = new Admin(id,username,email,passwordHash,true);
+        Admin a = new Admin(id, username, email, passwordHash, true);
         return a;
     }
-    
-    
-     private static JSONObject userToJson(User u) {
+
+    private static JSONObject userToJson(User u) {
         JSONObject obj = new JSONObject();
         obj.put("username", u.getUsername());
         obj.put("userId", u.getUserId());
         obj.put("email", u.getEmail());
         obj.put("passwordHash", u.getPasswordHash());
         obj.put("role", u.getRole());
-        if(u.getRole().equalsIgnoreCase("student")){
-          Student s = (Student) u;
-          obj.put("enrolledCourses",new JSONArray(s.getEnrolledCourses()));
-          int i;
-          ArrayList<LessonProgress> temp = s.getProgress();
-          JSONArray temparr = new JSONArray();
-           for(i=0;i<temp.size();++i){
-             JSONObject prog = new JSONObject();
-             prog.put("courseId",temp.get(i).getcID());
-             prog.put("lessonId",temp.get(i).getlID());
-             prog.put("Complete", temp.get(i).isIsComplete());
-             temparr.put(prog);
-          }
-          obj.put("progress", temparr);
-          
-          ArrayList<QuizAttempt> attempts = s.getQuizAttempts();
-          JSONArray attemptsArr = new JSONArray();
-          if (attempts != null) {
-              for (i = 0 ; i < attempts.size() ; i++) {
-                  QuizAttempt a = attempts.get(i);
-                  JSONObject at = new JSONObject();
-                  at.put("lessonID", a.getLessonID());
-                  at.put("score", a.getScore());
-                  at.put("totalQuestions", a.getTotalQuestions());
-                  at.put("passed", a.isPassed());
-                  at.put("attemptNumber", a.getAttemptNumber());
-                  attemptsArr.put(at);
-              }
-          }
-          obj.put("quizAttempts", attemptsArr);
-        }
-        else if(u.getRole().equalsIgnoreCase("instructor")){
+        if (u.getRole().equalsIgnoreCase("student")) {
+            Student s = (Student) u;
+            obj.put("enrolledCourses", new JSONArray(s.getEnrolledCourses()));
+            int i;
+            ArrayList<LessonProgress> temp = s.getProgress();
+            JSONArray temparr = new JSONArray();
+            for (i = 0; i < temp.size(); ++i) {
+                JSONObject prog = new JSONObject();
+                prog.put("courseId", temp.get(i).getcID());
+                prog.put("lessonId", temp.get(i).getlID());
+                prog.put("Complete", temp.get(i).isIsComplete());
+                temparr.put(prog);
+            }
+            obj.put("progress", temparr);
+
+            ArrayList<QuizAttempt> attempts = s.getQuizAttempts();
+            JSONArray attemptsArr = new JSONArray();
+            if (attempts != null) {
+                for (i = 0; i < attempts.size(); i++) {
+                    QuizAttempt a = attempts.get(i);
+                    JSONObject at = new JSONObject();
+                    at.put("lessonID", a.getLessonID());
+                    at.put("score", a.getScore());
+                    at.put("totalQuestions", a.getTotalQuestions());
+                    at.put("passed", a.isPassed());
+                    at.put("attemptNumber", a.getAttemptNumber());
+                    attemptsArr.put(at);
+                }
+            }
+            obj.put("quizAttempts", attemptsArr);
+            JSONArray certArr = new JSONArray();
+            if (s.getCertificates() != null) {
+                for (Certificate c : s.getCertificates()) {
+                    JSONObject co = new JSONObject();
+                    co.put("certificateId", c.getCertificateId());
+                    co.put("studentId", c.getStudentId());
+                    co.put("courseId", c.getCourseId());
+                    co.put("issueDate", c.getIssueDate());
+                    certArr.put(co);
+                }
+            }
+            obj.put("certificates", certArr);
+
+        } else if (u.getRole().equalsIgnoreCase("instructor")) {
             Instructor ins = (Instructor) u;
-            obj.put("createdCourses",new JSONArray(ins.getCreatedCourses()));
+            obj.put("createdCourses", new JSONArray(ins.getCreatedCourses()));
         }
 
         return obj;
     }
-     private static JSONObject courseToJson(Course c){
-          JSONObject obj = new JSONObject();
-          obj.put("courseId", c.getCourseID());
-          obj.put("instructorID", c.getInstructorID());
-          obj.put("title", c.getTitle());
-          obj.put("description", c.getDescription());
-          obj.put("status",c.getStatus());
-          
-          if(c.getLessons().size()!=0){
-             int i;
-             ArrayList<Lesson> temp = c.getLessons();
-             JSONArray temparr = new JSONArray();
-             for(i=0;i<temp.size();++i){
-             JSONObject lesson = new JSONObject();
-             lesson.put("lessonId",temp.get(i).getLessonId());
-             lesson.put("title", temp.get(i).getTitle());
-             lesson.put("content", temp.get(i).getContent());
-             ArrayList<String> res = temp.get(i).getResources();
-             if(res != null && !res.isEmpty())
-                 for(i=0;i<temp.get(i).getResources().size();++i)
-                     lesson.put("resources", temp.get(i).getResources());
-             
-             Quiz quiz = temp.get(i).getQuiz();
-             if (quiz != null && quiz.getQuestions().size() > 0) {
-                 JSONObject quizObj = new JSONObject();
-                 quizObj.put("maxAttempts", quiz.getMaxAttempts());
-                 JSONArray qArr = new JSONArray();
-                 for (i = 0 ; i < quiz.getQuestions().size() ; ++i) {
-                     Question q = quiz.getQuestions().get(i);
-                     JSONObject qj = new JSONObject();
-                     qj.put("question", q.getQuestion());
-                     qj.put("options", new JSONArray(q.getOptions()));
-                     qj.put("correctAns", q.getCorrectAns());
-                     qArr.put(qj);
-                 }
-                 quizObj.put("questions", qArr);
-                 lesson.put("quiz", quizObj);
-             }
-             
-             temparr.put(lesson);
-          }
-             obj.put("lessons", temparr);
-          }
-          if(c.getStudents().size()!=0){
-             ArrayList<Student> s = c.getStudents();
-             JSONArray temparr = new JSONArray();
-             int i;
-             for(i=0;i<s.size();++i){
+
+    private static JSONObject courseToJson(Course c) {
+        JSONObject obj = new JSONObject();
+        obj.put("courseId", c.getCourseID());
+        obj.put("instructorID", c.getInstructorID());
+        obj.put("title", c.getTitle());
+        obj.put("description", c.getDescription());
+        obj.put("status", c.getStatus());
+
+        if (c.getLessons().size() != 0) {
+            int i;
+            ArrayList<Lesson> temp = c.getLessons();
+            JSONArray temparr = new JSONArray();
+            for (i = 0; i < temp.size(); ++i) {
+                JSONObject lesson = new JSONObject();
+                lesson.put("lessonId", temp.get(i).getLessonId());
+                lesson.put("title", temp.get(i).getTitle());
+                lesson.put("content", temp.get(i).getContent());
+                ArrayList<String> res = temp.get(i).getResources();
+                if (res != null && !res.isEmpty()) {
+                    for (i = 0; i < temp.get(i).getResources().size(); ++i) {
+                        lesson.put("resources", temp.get(i).getResources());
+                    }
+                }
+
+                Quiz quiz = temp.get(i).getQuiz();
+                if (quiz != null && quiz.getQuestions().size() > 0) {
+                    JSONObject quizObj = new JSONObject();
+                    quizObj.put("maxAttempts", quiz.getMaxAttempts());
+                    JSONArray qArr = new JSONArray();
+                    for (i = 0; i < quiz.getQuestions().size(); ++i) {
+                        Question q = quiz.getQuestions().get(i);
+                        JSONObject qj = new JSONObject();
+                        qj.put("question", q.getQuestion());
+                        qj.put("options", new JSONArray(q.getOptions()));
+                        qj.put("correctAns", q.getCorrectAns());
+                        qArr.put(qj);
+                    }
+                    quizObj.put("questions", qArr);
+                    lesson.put("quiz", quizObj);
+                }
+
+                temparr.put(lesson);
+            }
+            obj.put("lessons", temparr);
+        }
+        if (c.getStudents().size() != 0) {
+            ArrayList<Student> s = c.getStudents();
+            JSONArray temparr = new JSONArray();
+            int i;
+            for (i = 0; i < s.size(); ++i) {
                 JSONObject student = userToJson(s.get(i));
                 temparr.put(student);
-             }
-             obj.put("students", temparr);
-          }
-              
-     return obj;
-     }
-     public static void saveUser(ArrayList<User> u) throws IOException{
-       JSONArray user = new JSONArray();
-       int i;
-       for(i=0;i<u.size();++i)
-           user.put(userToJson(u.get(i)));
-          FileWriter f = new FileWriter("users.json");
-         f.write(user.toString(2));
-         f.close();
-     }
-     public static void saveCourse(ArrayList<Course> c) throws IOException{
-         JSONArray course = new JSONArray();
-         int i;
-         for(i=0;i<c.size();++i)
-             course.put(courseToJson(c.get(i)));
-         FileWriter f = new FileWriter("courses.json");
-         f.write(course.toString(2));
-         f.close();
-     
-     }
-     public static int generateNewUserId() throws IOException {
-         ArrayList<User> users = loadUsers();
-         
-         int maxId = 0;
-         
-         for (int i = 0 ; i < users.size() ; i++) {
-             if (users.get(i).getUserId() > maxId) {
-                 maxId = users.get(i).getUserId();
-             }
-         }
-         return maxId + 1;
-    }
-    public static boolean courseIdExists(int id) throws IOException {
-    ArrayList<Course> courses = loadCourses();
-    if (courses == null) return false;
-
-    for (Course c : courses) {
-        if (c.getCourseID() == id) {
-            return true;
+            }
+            obj.put("students", temparr);
         }
+
+        return obj;
     }
-    return false;
+
+    public static void saveUser(ArrayList<User> u) throws IOException {
+        JSONArray user = new JSONArray();
+        int i;
+        for (i = 0; i < u.size(); ++i) {
+            user.put(userToJson(u.get(i)));
+        }
+        FileWriter f = new FileWriter("users.json");
+        f.write(user.toString(2));
+        f.close();
+    }
+
+    public static void saveCourse(ArrayList<Course> c) throws IOException {
+        JSONArray course = new JSONArray();
+        int i;
+        for (i = 0; i < c.size(); ++i) {
+            course.put(courseToJson(c.get(i)));
+        }
+        FileWriter f = new FileWriter("courses.json");
+        f.write(course.toString(2));
+        f.close();
+
+    }
+
+    public static int generateNewUserId() throws IOException {
+        ArrayList<User> users = loadUsers();
+
+        int maxId = 0;
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserId() > maxId) {
+                maxId = users.get(i).getUserId();
+            }
+        }
+        return maxId + 1;
+    }
+
+    public static boolean courseIdExists(int id) throws IOException {
+        ArrayList<Course> courses = loadCourses();
+        if (courses == null) {
+            return false;
+        }
+
+        for (Course c : courses) {
+            if (c.getCourseID() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static void exportCertificateAsJson(Certificate cert) throws IOException {
+    JSONObject obj = new JSONObject();
+    obj.put("certificateId", cert.getCertificateId());
+    obj.put("studentId", cert.getStudentId());
+    obj.put("courseId", cert.getCourseId());
+    obj.put("issueDate", cert.getIssueDate());
+
+    String filename = cert.getCertificateId() + ".json";
+
+    FileWriter writer = new FileWriter(filename);
+    writer.write(obj.toString(4));
+    writer.close();
+
 }
-
-
 }

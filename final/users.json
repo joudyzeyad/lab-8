@@ -13,6 +13,8 @@
   },
   {
     "role": "student",
+    "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [99999],
     "progress": [{
       "Complete": true,
@@ -26,6 +28,8 @@
   },
   {
     "role": "student",
+    "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [99999],
     "progress": [{
       "Complete": true,
@@ -61,6 +65,8 @@
   },
   {
     "role": "student",
+    "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [
       10,
       99999,
@@ -90,6 +96,8 @@
   },
   {
     "role": "student",
+    "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [
       10,
       99999,
@@ -134,11 +142,28 @@
   },
   {
     "role": "student",
+    "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [],
     "progress": [],
     "userId": 9457,
     "email": "f@g.c",
     "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
     "username": "fa"
+  },
+  {
+    "role": "student",
+    "quizAttempts": [],
+    "certificates": [],
+    "enrolledCourses": [99999],
+    "progress": [{
+      "Complete": true,
+      "lessonId": 1,
+      "courseId": 99999
+    }],
+    "userId": 9458,
+    "email": "m@m.com",
+    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "username": "malak"
   }
 ]
