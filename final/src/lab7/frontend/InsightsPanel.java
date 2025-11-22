@@ -210,9 +210,13 @@ private void loadStudents() {
            if(selected == 1){
               int sId = studentComboBox.getSelectedIndex();
               Student s = course.getStudents().get(sId);
-              DefaultCategoryDataset dataset = new DefaultCategoryDataset();    
-                      
-                          
+              DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+              StudentManager m = new StudentManager(s);
+              for(Lesson l:course.getLessons()){
+                  dataset.addValue(m.maxScore(l.getLessonId()), "Score", "Lesson " + l.getLessonId());
+              }        
+              JFreeChart chart = ChartFactory.createBarChart("Student performance chart: " + s.getUserId(),"Lesson","Score",dataset);
+              new ChartFramee(chart, "Student performance chart: " + s.getUserId());            
                  
               }
                  

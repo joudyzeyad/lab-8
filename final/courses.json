@@ -3,38 +3,63 @@
     "description": "object oriented programming",
     "students": [
       {
-        "role": "student",
-        "enrolledCourses": [99999],
-        "progress": [{
-          "Complete": true,
-          "lessonId": 1,
-          "courseId": 99999
-        },
-        {
-          "Complete": true,
-          "lessonId": 2,
-          "courseId": 99999
-        }
-],
-        "userId": 3333,
-        "email": "j@gml.com",
-        "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
-        "username": "jj"
-      },
+  "role": "student",
+  "enrolledCourses": [99999],
+  "progress": [
+    { "Complete": true, "lessonId": 1, "courseId": 99999 },
+    { "Complete": true, "lessonId": 2, "courseId": 99999 }
+  ],
+  "quizAttempts": [
+    {
+      "lessonID": 1,
+      "score": 8,
+      "totalQuestions": 10,
+      "passed": true,
+      "attemptNumber": 1
+    },
+    {
+      "lessonID": 1,
+      "score": 6,
+      "totalQuestions": 10,
+      "passed": false,
+      "attemptNumber": 2
+    },
+    {
+      "lessonID": 2,
+      "score": 6,
+      "totalQuestions": 10,
+      "passed": false,
+      "attemptNumber": 1
+    }
+  ],
+  "userId": 3333,
+  "email": "j@gml.com",
+  "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
+  "username": "jj"
+},
       {
         "role": "student",
         "enrolledCourses": [99999],
-        "progress": [{
-          "Complete": true,
-          "lessonId": 1,
-          "courseId": 99999
-        },
-        {
-          "Complete": false,
-          "lessonId": 2,
-          "courseId": 99999
-        }
-],
+        "progress": [
+          { "Complete": true, "lessonId": 1, "courseId": 99999 },
+          { "Complete": false, "lessonId": 2, "courseId": 99999 }
+        ],
+        "quizAttempts": [
+          {
+            "lessonID": 1,
+            "score": 10,
+            "totalQuestions": 10,
+            "passed": true,
+            "attemptNumber": 1
+          },
+          {
+            "lessonID": 2,
+            "score": 3,
+            "totalQuestions": 10,
+            "passed": false,
+            "attemptNumber": 1
+          }
+        ],
         "userId": 5555,
         "email": "y@.",
         "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
@@ -45,18 +70,12 @@
     "courseId": 99999,
     "instructorID": 919191,
     "status": "APPROVED",
-    "lessons": [{
-      "lessonId": 1,
-      "title": "Introduction",
-      "content": "Welcome"
-    },
-    {
-      "lessonId": 2,
-      "title": "Abstraction",
-      "content": "oop"
-    }
-]
+    "lessons": [
+      { "lessonId": 1, "title": "Introduction", "content": "Welcome" },
+      { "lessonId": 2, "title": "Abstraction", "content": "oop" }
+    ]
   },
+
   {
     "description": "math1",
     "title": "Math",
@@ -64,6 +83,7 @@
     "instructorID": 5,
     "status": "DECLINED"
   },
+
   {
     "description": "test",
     "title": "farida",
@@ -71,6 +91,7 @@
     "instructorID": 2,
     "status": "APPROVED"
   },
+
   {
     "description": "try",
     "title": "test2",
