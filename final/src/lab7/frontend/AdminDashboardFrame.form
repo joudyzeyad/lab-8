@@ -46,18 +46,21 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel1" max="32767" attributes="0"/>
-                              <Component id="manage" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                           <Component id="logout" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="view" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel1" max="32767" attributes="0"/>
+                                  <Component id="manage" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="315" max="32767" attributes="0"/>
@@ -71,7 +74,9 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="manage" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="201" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="view" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="166" max="32767" attributes="0"/>
                   <Component id="logout" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               </Group>
@@ -101,6 +106,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="view">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="view all courses"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

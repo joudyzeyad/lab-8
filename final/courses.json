@@ -61,5 +61,12 @@
     "courseId": 9603,
     "instructorID": 2,
     "status": "APPROVED"
+  },
+  {
+    "description": "try",
+    "title": "test2",
+    "courseId": 666,
+    "instructorID": 2,
+    "status": "DECLINED"
   }
 ]

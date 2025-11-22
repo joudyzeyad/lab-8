@@ -36,6 +36,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         manage = new javax.swing.JButton();
         logout = new javax.swing.JButton();
+        view = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +57,13 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        view.setText("view all courses");
+        view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
@@ -63,13 +71,15 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(manage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
                         .addGap(136, 136, 136)
-                        .addComponent(logout)))
+                        .addComponent(logout))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(view, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(manage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(315, Short.MAX_VALUE))
         );
         contentPanelLayout.setVerticalGroup(
@@ -79,7 +89,9 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(manage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(view)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(logout)
                 .addGap(56, 56, 56))
         );
@@ -132,6 +144,20 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logoutActionPerformed
 
+    private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
+        // TODO add your handling code here:
+         AdminViewCourses DisplayCourses;
+        try {
+        DisplayCourses = new AdminViewCourses();
+        contentPanel.removeAll();
+        contentPanel.add(DisplayCourses, java.awt.BorderLayout.CENTER);
+        contentPanel.revalidate();
+        contentPanel.repaint();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminDashboardFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_viewActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -142,5 +168,6 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logout;
     private javax.swing.JButton manage;
+    private javax.swing.JButton view;
     // End of variables declaration//GEN-END:variables
 }
