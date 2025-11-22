@@ -18,18 +18,29 @@ public class Course {
     private int instructorID;
     private String title;
     private String description;
+    private String status;
     private ArrayList<Lesson> lessons = new ArrayList<>();
     private ArrayList<Student> students= new ArrayList<>();
 
-    public Course(int courseID, int instructorID, String title, String description) {
+    public Course(int courseID, int instructorID, String title, String description,String status) {
         this.courseID = courseID;
         this.instructorID = instructorID;
         this.title = title;
         this.description = description;
+        this.status=status;
     }
 
     public Course() {
     }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     public void addLesson(Lesson l){
           lessons.add(l);
     }
@@ -83,6 +94,16 @@ public class Course {
 
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
+    }
+    
+    public static Course getCourse(int cID) throws IOException
+    {
+      ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
+      for(int i=0;i<courses.size();i++)
+      { if(courses.get(i).getCourseID()==cID)
+              return courses.get(i);
+      }
+      return null;
     }
     
 }

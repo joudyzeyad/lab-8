@@ -176,9 +176,10 @@ public class LoginFrame extends javax.swing.JFrame {
             if (user.getRole().equals("student")) {
                 new StudentDashboardFrame((Student)user).setVisible(true);
             }
-            else {
+            else if(user.getRole().equalsIgnoreCase("instructor")) {
                 new InstructorDashboardFrame().setVisible(true);
             }
+            else {new AdminDashboardFrame().setVisible(true);}
             
             this.dispose();
         }

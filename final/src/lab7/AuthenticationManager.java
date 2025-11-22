@@ -35,10 +35,10 @@ public class AuthenticationManager {
             if (role.equalsIgnoreCase("student")) {
                 newUser = new Student(newId, username, email, password);
             }
-            else {
+            else if(role.equalsIgnoreCase("instructor")){
                 newUser = new Instructor(newId, username, email, password);
             }
-            
+            else {newUser = new Admin(newId, username, email, password);}
             users.add(newUser);
             JsonDatabaseManager.saveUser(users);
             

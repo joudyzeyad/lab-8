@@ -64,7 +64,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         signUpLabel.setFont(new java.awt.Font("Book Antiqua", 3, 18)); // NOI18N
         signUpLabel.setText("Sign up to create a new account");
 
-        roleBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Role", "Student", "Instructor" }));
+        roleBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Role", "Student", "Instructor", "Admin" }));
         roleBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleBoxActionPerformed(evt);

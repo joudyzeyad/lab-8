@@ -46,9 +46,12 @@ public class JsonDatabaseManager {
             if(role.equalsIgnoreCase("student")){
                 Student s = jsonToStudent(obj);
                 u.add(s);}
-            else {
+            else if(role.equalsIgnoreCase("instructor")){
                 Instructor ins = jsonToInstructor(obj);
                 u.add(ins);
+            }
+            else { Admin adm=jsonToAdmin(obj);
+                   u.add(adm);
             }
           }
           return u;
@@ -58,7 +61,8 @@ public class JsonDatabaseManager {
         int instID = obj.getInt("instructorID");
         String title = obj.getString("title");
         String description = obj.getString("description");
-        Course c = new Course(cID,instID,title,description);
+        String status=obj.getString("status");
+        Course c = new Course(cID,instID,title,description,status);
         int i;
         if(obj.has("students")){
           JSONArray sArr = obj.getJSONArray("students");
@@ -134,6 +138,19 @@ public class JsonDatabaseManager {
          return l;
     
     }
+    
+    
+    private static Admin jsonToAdmin(JSONObject obj)
+    {
+        int id = obj.getInt("userId");
+        String username = obj.getString("username");
+        String email = obj.getString("email");
+        String passwordHash = obj.getString("passwordHash");
+        Admin a = new Admin(id,username,email,passwordHash,true);
+        return a;
+    }
+    
+    
      private static JSONObject userToJson(User u) {
         JSONObject obj = new JSONObject();
         obj.put("username", u.getUsername());
@@ -156,7 +173,7 @@ public class JsonDatabaseManager {
           }
           obj.put("progress", temparr);
         }
-        else{
+        else if(u.getRole().equalsIgnoreCase("instructor")){
             Instructor ins = (Instructor) u;
             obj.put("createdCourses",new JSONArray(ins.getCreatedCourses()));
         }
@@ -169,12 +186,14 @@ public class JsonDatabaseManager {
           obj.put("instructorID", c.getInstructorID());
           obj.put("title", c.getTitle());
           obj.put("description", c.getDescription());
+          obj.put("status",c.getStatus());
+          
           if(c.getLessons().size()!=0){
              int i;
              ArrayList<Lesson> temp = c.getLessons();
              JSONArray temparr = new JSONArray();
              for(i=0;i<temp.size();++i){
-               JSONObject lesson = new JSONObject();
+             JSONObject lesson = new JSONObject();
              lesson.put("lessonId",temp.get(i).getLessonId());
              lesson.put("title", temp.get(i).getTitle());
              lesson.put("content", temp.get(i).getContent());
