@@ -9,8 +9,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.SwingUtilities.getWindowAncestor;
 import lab7.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 
 /**
  *
@@ -18,13 +25,15 @@ import lab7.*;
  */
 public class InsightsPanel extends javax.swing.JPanel {
         private int courseId;
-    /**
+        ArrayList<Course> c = JsonDatabaseManager.loadCourses();
+    /** 
      * Creates new form InsightsPanel
      */
-    public InsightsPanel(int id) {
+    public InsightsPanel(int id) throws IOException {
         initComponents();
         this.courseId=id;
         chartComboBox.addActionListener(e -> loadStudents());
+        
 }
 
 private void loadStudents() {
@@ -33,19 +42,13 @@ private void loadStudents() {
     if (selected == 1) { 
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
 
-        try { ArrayList<Course> c = JsonDatabaseManager.loadCourses(); 
-        for(int i =0;i<c.size();++i){ 
+        for(int i =0;i<c.size();++i){
             if(c.get(i).getCourseID() == this.courseId){ 
                 for (Student s : c.get(i).getStudents()) {
-                    model.addElement(String.valueOf(s.getUserId())); } 
-            } 
-        } 
-        studentComboBox.setModel(model);
-
-        } catch (IOException ex) {
-            Logger.getLogger(InsightsPanel.class.getName())
-                  .log(Level.SEVERE, null, ex);
+                    model.addElement(String.valueOf(s.getUserId())); }
+            }
         }
+        studentComboBox.setModel(model);
     }
 }
 
@@ -184,6 +187,10 @@ private void loadStudents() {
 
     private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
         // TODO add your handling code here:
+        JFrame frame = (JFrame) getWindowAncestor(this);
+        frame.setContentPane(new InstructorDashboardFrame().getContentPane());
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_backbuttonActionPerformed
 
     private void chartComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chartComboBoxActionPerformed
@@ -193,18 +200,38 @@ private void loadStudents() {
     private void viewbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbuttonActionPerformed
         // TODO add your handling code here:
         int selected = chartComboBox.getSelectedIndex();
+        Course course = null;
+        for(int i =0;i<c.size();++i){
+                  if(c.get(i).getCourseID() == this.courseId)
+                      course = c.get(i);}
         if(selected == 0)
             JOptionPane.showMessageDialog(this, "Please select the data you want to view.");
         else{
            if(selected == 1){
               int sId = studentComboBox.getSelectedIndex();
-              if(sId == 0)
-                 JOptionPane.showMessageDialog(this, "Please select the student you want to view."); 
-              else{
+              Student s = course.getStudents().get(sId);
+              DefaultCategoryDataset dataset = new DefaultCategoryDataset();    
+                      
+                          
                  
               }
+                 
+           if(selected == 2){
+           
            }
-        
+           if(selected == 3){
+                      try {
+                          DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                          for(Lesson l:course.getLessons()){
+                              dataset.addValue(ProgressManager.percentageCompletion(this.courseId, l.getLessonId()), "Percentage %", "Lesson " + l.getLessonId());
+                              System.out.println(ProgressManager.percentageCompletion(this.courseId, l.getLessonId()));
+                          }
+                          JFreeChart chart = ChartFactory.createBarChart(" Completion percentages: " + course.getTitle(),"Lesson","Percentage %",dataset);
+                          new ChartFramee(chart, "Completion Percentage " + course.getTitle());
+                      } catch (IOException ex) {
+                          Logger.getLogger(InsightsPanel.class.getName()).log(Level.SEVERE, null, ex);
+                      }
+           }
         }
     }//GEN-LAST:event_viewbuttonActionPerformed
 

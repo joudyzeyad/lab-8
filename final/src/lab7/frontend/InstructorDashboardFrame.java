@@ -190,12 +190,16 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void insightsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insightsbuttonActionPerformed
-        // TODO add your handling code here:
-        ViewCoursePanel p = new ViewCoursePanel();
-        contentPanel.removeAll();
-        contentPanel.add(p, java.awt.BorderLayout.CENTER);
-        contentPanel.revalidate();
-        contentPanel.repaint();
+        try {
+            // TODO add your handling code here:
+            ViewCoursePanel p = new ViewCoursePanel();
+            contentPanel.removeAll();
+            contentPanel.add(p, java.awt.BorderLayout.CENTER);
+            contentPanel.revalidate();
+            contentPanel.repaint();
+        } catch (IOException ex) {
+            Logger.getLogger(InstructorDashboardFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_insightsbuttonActionPerformed
 
  

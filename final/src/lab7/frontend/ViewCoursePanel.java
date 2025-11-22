@@ -6,6 +6,8 @@ package lab7.frontend;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.SwingUtilities.getWindowAncestor;
@@ -120,15 +122,20 @@ public class ViewCoursePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a course");
             return;
         } else{
-            int id = (int) jTable1.getValueAt(selectedRow, 1);
-             InsightsPanel p = new InsightsPanel(id);
+            try {
+                int id = (int) jTable1.getValueAt(selectedRow, 1);
+                InsightsPanel p;
+                p = new InsightsPanel(id);
                 java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-
+                
                 if (window instanceof javax.swing.JFrame frame) {
                     frame.setContentPane(p);
                     frame.revalidate();
                     frame.repaint();
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(ViewCoursePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }
     }//GEN-LAST:event_jButton1ActionPerformed

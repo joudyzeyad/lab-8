@@ -100,7 +100,7 @@ public class StudentManager {
         boolean flag = false;
         for(i=0;i<temp.size();++i)
             if(temp.get(i).getlID()== lId)
-               flag =  temp.get(i).isIsComplete();
+               return  temp.get(i).isIsComplete();
         return flag;
      }
     
@@ -220,6 +220,7 @@ public class StudentManager {
             return a;
         }
     }
+    
     
     public boolean canAccessLesson(int courseID,int lessonID) throws IOException {
         ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
