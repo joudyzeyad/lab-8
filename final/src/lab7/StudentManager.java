@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class StudentManager {
 
     private Student s;
+    private static final double PASSING_POINT = 0.5;
 
     public StudentManager(Student s) {
         this.s = s;
@@ -127,5 +128,109 @@ public class StudentManager {
             }
         }
         JsonDatabaseManager.saveCourse(courses);
+    }
+    
+    public boolean alreadyPassed(int lessonID) {
+        for (int i = 0 ; i < s.getQuizAttempts().size() ; i++) {
+            if (s.getQuizAttempts().get(i).getLessonID() == lessonID && s.getQuizAttempts().get(i).isPassed()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public QuizAttempt saveAttempt (int courseID, int lessonID, ArrayList<Integer> submittedAns) throws IOException {
+        ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
+        Course c = null;
+        Lesson l = null;
+        
+        for (int i = 0 ; i < courses.size() ; i++) {
+            if (courses.get(i).getCourseID() == courseID) {
+                c = courses.get(i);
+                for (int j = 0 ; j < c.getLessons().size() ; j++) {
+                    if (c.getLessons().get(j).getLessonId() == lessonID) {
+                        l = c.getLessons().get(j);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        
+        if (l == null) {
+            throw new IOException("Lesson not found !");
+        }
+        
+        Quiz quiz = l.getQuiz();
+        
+        if (quiz == null || quiz.getQuestions().isEmpty()) {
+            throw new IOException("No quiz is created for this lesson");
+        }
+        
+        int total = quiz.getTotalQuestions();
+        int score = 0;
+        
+        for (int i = 0 ; i < total && i < submittedAns.size() ; i++) {
+            if (submittedAns.get(i) == quiz.getQuestions().get(i).getCorrectAns()) {
+                score++;
+            }
+        }
+        
+        boolean passed;
+        
+        if (score >= (int) Math.ceil(PASSING_POINT * total)) {
+            passed = true;
+        }
+        else {
+            passed = false;
+        }
+        
+        int attemptNumber = 1;
+        for (int i = 0 ; i < s.getQuizAttempts().size() ; i++) {
+            if (s.getQuizAttempts().get(i).getLessonID() == lessonID) {
+                attemptNumber = Math.max(attemptNumber, s.getQuizAttempts().get(i).getAttemptNumber() + 1);
+            }
+        }
+        
+        if (attemptNumber > quiz.getMaxAttempts() && !passed) {
+            QuizAttempt a = new QuizAttempt(lessonID, score, total, false, attemptNumber); //passed = false to mark attempt as failed due to exceeded number of maxAttempts
+            s.getQuizAttempts().add(a);
+            updateStudentInJson();
+            return a;
+        }
+        else {
+            QuizAttempt a = new QuizAttempt(lessonID, score, total, passed, attemptNumber);
+            s.getQuizAttempts().add(a);
+            
+            if (passed) {
+                l.setIsComplete(true);
+                JsonDatabaseManager.saveCourse(courses);
+            }
+            
+            updateStudentInJson();
+            return a;
+        }
+    }
+    
+    public boolean canAccessLesson(int courseID,int lessonID) throws IOException {
+        ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
+        
+        for (int i = 0 ; i < courses.size() ; i++) {
+            if (courses.get(i).getCourseID() == courseID) {
+                Course c = courses.get(i);
+                for (int j = 0 ; j < c.getLessons().size() ; j++) {
+                    if (c.getLessons().get(j).getLessonId() == lessonID) {
+                        if (j == 0) { //first lesson assuming that lessons' order is the order in the c.getLessons() list
+                            return true;
+                        }
+                        else { //must check that previous lesson is passed
+                            Lesson previous = c.getLessons().get(j - 1);
+                            return previous.isComplete() || alreadyPassed(previous.getLessonId());
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
