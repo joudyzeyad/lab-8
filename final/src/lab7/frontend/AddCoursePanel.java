@@ -220,7 +220,8 @@ public class AddCoursePanel extends javax.swing.JPanel {
                         int cID = Integer.parseInt(cIDField.getText());
                         String descrip = descripField.getText();
                         int iID = Integer.parseInt(iIDField1.getText());
-                        Course c =new Course(cID, iID,title, descrip);
+                        String status="PENDING";
+                        Course c =new Course(cID, iID,title, descrip,status);
                         Instructor.courseCreation(c);
                         JOptionPane.showMessageDialog(this,"Course added successfully");
                     }
