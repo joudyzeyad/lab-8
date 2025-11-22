@@ -256,16 +256,15 @@ public class JsonDatabaseManager {
              lesson.put("content", temp.get(i).getContent());
              ArrayList<String> res = temp.get(i).getResources();
              if(res != null && !res.isEmpty())
-                 for(i=0;i<temp.get(i).getResources().size();++i)
-                     lesson.put("resources", temp.get(i).getResources());
+                 lesson.put("resources", new JSONArray(res));
              
              Quiz quiz = temp.get(i).getQuiz();
              if (quiz != null && quiz.getQuestions().size() > 0) {
                  JSONObject quizObj = new JSONObject();
                  quizObj.put("maxAttempts", quiz.getMaxAttempts());
                  JSONArray qArr = new JSONArray();
-                 for (i = 0 ; i < quiz.getQuestions().size() ; ++i) {
-                     Question q = quiz.getQuestions().get(i);
+                 for (int qi = 0 ; qi < quiz.getQuestions().size() ; ++qi) {
+                     Question q = quiz.getQuestions().get(qi);
                      JSONObject qj = new JSONObject();
                      qj.put("question", q.getQuestion());
                      qj.put("options", new JSONArray(q.getOptions()));
