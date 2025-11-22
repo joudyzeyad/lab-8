@@ -10,19 +10,10 @@
           "lessonId": 1,
           "courseId": 99999
         }],
-        "userId": 3,
+        "userId": 3333,
         "email": "j@gml.com",
         "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
         "username": "jj"
-      },
-      {
-        "role": "student",
-        "enrolledCourses": [],
-        "progress": [],
-        "userId": 4,
-        "email": "y@.",
-        "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
-        "username": "yy"
       },
       {
         "role": "student",
@@ -32,7 +23,7 @@
           "lessonId": 1,
           "courseId": 99999
         }],
-        "userId": 4,
+        "userId": 5,
         "email": "y@.",
         "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
         "username": "yy"

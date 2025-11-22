@@ -42,6 +42,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         manageCourses = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        insightsbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,22 +81,18 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Instructor Dashboard");
 
+        insightsbutton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        insightsbutton.setText("Insights");
+        insightsbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insightsbuttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(ManageLessonsButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(manageCourses))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(viewStudentsButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(127, 127, 127))
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addGap(152, 152, 152)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -104,6 +101,16 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backButton)
                 .addGap(91, 91, 91))
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ManageLessonsButton)
+                    .addComponent(viewStudentsButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageCourses)
+                    .addComponent(insightsbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(127, 127, 127))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,9 +121,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ManageLessonsButton)
                     .addComponent(manageCourses))
-                .addGap(48, 48, 48)
-                .addComponent(viewStudentsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGap(86, 86, 86)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewStudentsButton)
+                    .addComponent(insightsbutton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -180,11 +189,21 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void insightsbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insightsbuttonActionPerformed
+        // TODO add your handling code here:
+        ViewCoursePanel p = new ViewCoursePanel();
+        contentPanel.removeAll();
+        contentPanel.add(p, java.awt.BorderLayout.CENTER);
+        contentPanel.revalidate();
+        contentPanel.repaint();
+    }//GEN-LAST:event_insightsbuttonActionPerformed
+
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ManageLessonsButton;
     private javax.swing.JButton backButton;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton insightsbutton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageCourses;
     private javax.swing.JButton viewStudentsButton;
