@@ -201,8 +201,19 @@ public class StudentManager {
             s.getQuizAttempts().add(a);
             
             if (passed) {
-                l.setIsComplete(true);
-                JsonDatabaseManager.saveCourse(courses);
+                boolean found = false;
+                
+                for (int i = 0 ; i < s.getProgress().size() ; i++) {
+                    if (s.getProgress().get(i).getcID() == courseID && s.getProgress().get(i).getlID() == lessonID) {
+                        s.getProgress().get(i).setIsComplete(true);
+                        found = true;
+                        break;
+                    }
+                }
+                
+                if (!found) {
+                    s.getProgress().add(new LessonProgress(courseID, lessonID, true));
+                }
             }
             
             updateStudentInJson();
@@ -223,7 +234,7 @@ public class StudentManager {
                         }
                         else { //must check that previous lesson is passed
                             Lesson previous = c.getLessons().get(j - 1);
-                            return previous.isComplete() || alreadyPassed(previous.getLessonId());
+                            return isComplete(courseID, previous.getLessonId());
                         }
                     }
                 }

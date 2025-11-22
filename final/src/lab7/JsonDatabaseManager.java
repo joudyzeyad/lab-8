@@ -101,6 +101,21 @@ public class JsonDatabaseManager {
         }
         s.setProgress(cprogress);
         }
+        
+        if (obj.has("quizAttempts")) {
+            JSONArray qa = obj.getJSONArray("quizAttempts");
+            ArrayList<QuizAttempt> attempts = new ArrayList<>();
+            for (i = 0 ; i < qa.length() ; ++i) {
+                JSONObject a = qa.getJSONObject(i);
+                int lessonID = a.getInt("lessonID");
+                int score = a.getInt("score");
+                int totalQuestions = a.getInt("totalQuestions");
+                boolean passed = a.getBoolean("passed");
+                int attemptNumber = a.optInt("attemptNumber", 1);
+                attempts.add(new QuizAttempt(lessonID, score, totalQuestions, passed, attemptNumber));
+            }
+            s.setQuizAttempts(attempts);
+        }
         return s;
 }
     private static Instructor jsonToInstructor(JSONObject obj) {
@@ -131,6 +146,32 @@ public class JsonDatabaseManager {
               l.addResource(arr.getString(i));
            }
          }
+         
+         if (obj.has("quiz")) {
+             JSONObject qObj = obj.getJSONObject("quiz");
+             Quiz quiz = new Quiz();
+             if (qObj.has("maxAttempts")) {
+                 quiz.setMaxAttempts(qObj.getInt("maxAttempts"));
+             }
+             if (qObj.has("questions")) {
+                 JSONArray qArr = qObj.getJSONArray("questions");
+                 for (int qi = 0 ; qi < qArr.length() ; ++qi) {
+                     JSONObject qj = qArr.getJSONObject(qi);
+                     String questionText = qj.getString("question");
+                     ArrayList<String> options = new ArrayList<>();
+                     if (qj.has("options")) {
+                         JSONArray opts = qj.getJSONArray("options");
+                         for (int oi = 0 ; oi < opts.length() ; ++oi) {
+                             options.add(opts.getString(oi));
+                         }
+                     }
+                     int correct = qj.optInt("correctAns", 0);
+                     Question question = new Question(questionText, options, correct);
+                     quiz.addQuestion(question);
+                 }
+             }
+             l.setQuiz(quiz);
+         }
          return l;
     
     }
@@ -155,6 +196,22 @@ public class JsonDatabaseManager {
              temparr.put(prog);
           }
           obj.put("progress", temparr);
+          
+          ArrayList<QuizAttempt> attempts = s.getQuizAttempts();
+          JSONArray attemptsArr = new JSONArray();
+          if (attempts != null) {
+              for (i = 0 ; i < attempts.size() ; i++) {
+                  QuizAttempt a = attempts.get(i);
+                  JSONObject at = new JSONObject();
+                  at.put("lessonID", a.getLessonID());
+                  at.put("score", a.getScore());
+                  at.put("totalQuestions", a.getTotalQuestions());
+                  at.put("passed", a.isPassed());
+                  at.put("attemptNumber", a.getAttemptNumber());
+                  attemptsArr.put(at);
+              }
+          }
+          obj.put("quizAttempts", attemptsArr);
         }
         else{
             Instructor ins = (Instructor) u;
@@ -182,6 +239,24 @@ public class JsonDatabaseManager {
              if(res != null && !res.isEmpty())
                  for(i=0;i<temp.get(i).getResources().size();++i)
                      lesson.put("resources", temp.get(i).getResources());
+             
+             Quiz quiz = temp.get(i).getQuiz();
+             if (quiz != null && quiz.getQuestions().size() > 0) {
+                 JSONObject quizObj = new JSONObject();
+                 quizObj.put("maxAttempts", quiz.getMaxAttempts());
+                 JSONArray qArr = new JSONArray();
+                 for (i = 0 ; i < quiz.getQuestions().size() ; ++i) {
+                     Question q = quiz.getQuestions().get(i);
+                     JSONObject qj = new JSONObject();
+                     qj.put("question", q.getQuestion());
+                     qj.put("options", new JSONArray(q.getOptions()));
+                     qj.put("correctAns", q.getCorrectAns());
+                     qArr.put(qj);
+                 }
+                 quizObj.put("questions", qArr);
+                 lesson.put("quiz", quizObj);
+             }
+             
              temparr.put(lesson);
           }
              obj.put("lessons", temparr);

@@ -17,7 +17,12 @@ public class Question {
 
     public Question(String question, ArrayList<String> options, int correctAns) {
         this.question = question;
-        this.options = options;
+        if (options == null) {
+            this.options = new ArrayList<>();
+        }
+        else {
+            this.options = options;
+        }
         this.correctAns = correctAns;
     }
 
