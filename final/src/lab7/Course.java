@@ -54,6 +54,7 @@ public class Course {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+        
     }
 
     public int getInstructorID() {

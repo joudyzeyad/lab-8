@@ -26,22 +26,22 @@ public class ManageCourses extends javax.swing.JPanel {
      */
     public ManageCourses() throws IOException {
         initComponents();
-        //loadTable();
+        loadTable();
     }
 
-    
-    
-    /*public void loadTable() throws IOException
-    {
+    public void loadTable() throws IOException {
         DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
         m.setRowCount(0);
         ArrayList<Course> x = JsonDatabaseManager.loadCourses();
         for (int i = 0; i < x.size(); i++) {
             Course c = x.get(i);
-            m.addRow(new Object[]{c.getTitle(), c.getCourseID(), c.getInstructorID(), c.getDescription(), c.getLessons(),c.getStatus()});
+            if (c.getStatus().equalsIgnoreCase("pending")) {
+                m.addRow(new Object[]{c.getTitle(), c.getCourseID(), c.getInstructorID(), c.getDescription(), c.getLessons(), c.getStatus()});
+            }
 
         }
-    }*/
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,19 +123,75 @@ public class ManageCourses extends javax.swing.JPanel {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
         JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
-     new AdminDashboardFrame().setVisible(true);
-     current.dispose();
+        new AdminDashboardFrame().setVisible(true);
+        current.dispose();
     }//GEN-LAST:event_backActionPerformed
 
     private void approveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveActionPerformed
-        // TODO add your handling code here:
-        
-            
-    }//GEN-LAST:event_approveActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a course.");
+            return;
+        }
+
+        int cID = (int) jTable1.getValueAt(selectedRow, 1); // course ID
+        try {
+            // Load all courses from JSON
+            ArrayList<Course> allCourses = JsonDatabaseManager.loadCourses();
+
+            // Update the selected course
+            for (Course course : allCourses) {
+                if (course.getCourseID() == cID) {
+                    course.setStatus("APPROVED");
+                    jTable1.setValueAt(course.getStatus(), selectedRow, 5); // update JTable
+                    break;
+                }
+            }
+
+            // Save the updated list back to courses.json
+            JsonDatabaseManager.saveCourse(allCourses);
+
+            JOptionPane.showMessageDialog(this, "Course approved successfully!");
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error updating course status.");
+        }
+}//GEN-LAST:event_approveActionPerformed
 
     private void declineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_declineActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+// Get the selected row index
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow == -1) {
+            // No row selected
+            JOptionPane.showMessageDialog(this, "Please select a course.");
+            return;
+        }
+        int cID = (int) jTable1.getValueAt(selectedRow, 1);
+        try {
+            ArrayList<Course> allCourses = JsonDatabaseManager.loadCourses();
+
+            // Update the selected course
+            for (Course course : allCourses) {
+                if (course.getCourseID() == cID) {
+                    course.setStatus("DECLINED");
+                    jTable1.setValueAt(course.getStatus(), selectedRow, 5); // update JTable
+                    break;
+                }
+            }
+            JsonDatabaseManager.saveCourse(allCourses);
+
+            JOptionPane.showMessageDialog(this, "Course declined successfully!");
+
+        } catch (IOException ex) {
         
+            JOptionPane.showMessageDialog(this, "Error updating course status.");
+        }
+
+
     }//GEN-LAST:event_declineActionPerformed
 
 

@@ -41,6 +41,7 @@
     "title": "NEW TEST COURSE TITLE",
     "courseId": 99999,
     "instructorID": 919191,
+    "status": "APPROVED",
     "lessons": [{
       "lessonId": 1,
       "title": "Introduction",
@@ -51,6 +52,14 @@
     "description": "math1",
     "title": "Math",
     "courseId": 1111,
-    "instructorID": 5
+    "instructorID": 5,
+    "status": "DECLINED"
+  },
+  {
+    "description": "test",
+    "title": "farida",
+    "courseId": 9603,
+    "instructorID": 2,
+    "status": "PENDING"
   }
 ]

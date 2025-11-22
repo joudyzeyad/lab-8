@@ -4,6 +4,8 @@
  */
 package lab7;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author farida helal
@@ -17,4 +19,6 @@ public class Admin extends User {
     public Admin(int userId, String username, String email, String passwordHash, boolean alreadyHashed) {
         super(userId, username, email, passwordHash, "Admin", alreadyHashed);
     }
+    
+    
 }

@@ -1,7 +1,10 @@
 [
   {
     "role": "instructor",
-    "createdCourses": [10],
+    "createdCourses": [
+      10,
+      9603
+    ],
     "userId": 2,
     "email": "salma@gmail.com",
     "passwordHash": "593dfcbcac8dcb274b36502f642f8a5f0a27fb1eb5b042ea4f09a19ec56aa0c1",
@@ -40,5 +43,101 @@
     "email": "j@.",
     "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
     "username": "jou"
+  },
+  {
+    "role": "instructor",
+    "createdCourses": [
+      10,
+      10,
+      11,
+      11,
+      12
+    ],
+    "userId": 9452,
+    "email": "j@gmail.com",
+    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "username": "jana"
+  },
+  {
+    "role": "student",
+    "enrolledCourses": [
+      10,
+      99999,
+      12
+    ],
+    "progress": [
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 10
+      },
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 99999
+      },
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 12
+      }
+    ],
+    "userId": 9453,
+    "email": "r@gmail.com",
+    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "username": "rana"
+  },
+  {
+    "role": "student",
+    "enrolledCourses": [
+      10,
+      99999,
+      12
+    ],
+    "progress": [
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 99999
+      },
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 10
+      },
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 12
+      }
+    ],
+    "userId": 9454,
+    "email": "m0@gmail.com",
+    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "username": "mohamed"
+  },
+  {
+    "role": "Admin",
+    "userId": 9455,
+    "email": "f@f.c",
+    "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "username": "farida"
+  },
+  {
+    "role": "instructor",
+    "createdCourses": [],
+    "userId": 9456,
+    "email": "f@m.c",
+    "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "username": "farida"
+  },
+  {
+    "role": "student",
+    "enrolledCourses": [],
+    "progress": [],
+    "userId": 9457,
+    "email": "f@g.c",
+    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "username": "fa"
   }
 ]

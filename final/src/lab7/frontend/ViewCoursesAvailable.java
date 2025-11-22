@@ -49,7 +49,8 @@ public class ViewCoursesAvailable extends javax.swing.JPanel {
         ArrayList<Course> x = JsonDatabaseManager.loadCourses();
         for (int i = 0; i < x.size(); i++) {
             Course c = x.get(i);
-            m.addRow(new Object[]{c.getTitle(), c.getCourseID(), c.getInstructorID(), c.getDescription(), c.getLessons()});
+            if(c.getStatus().equalsIgnoreCase("approved"))
+            {m.addRow(new Object[]{c.getTitle(), c.getCourseID(), c.getInstructorID(), c.getDescription(), c.getLessons()});}
 
         }
     }
