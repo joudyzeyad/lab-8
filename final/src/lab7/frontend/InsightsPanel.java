@@ -210,23 +210,35 @@ private void loadStudents() {
            if(selected == 1){
               int sId = studentComboBox.getSelectedIndex();
               Student s = course.getStudents().get(sId);
-              DefaultCategoryDataset dataset = new DefaultCategoryDataset();    
-                      
-                          
+              DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+              StudentManager m = new StudentManager(s);
+              for(Lesson l:course.getLessons()){
+                  dataset.addValue(m.maxScore(l.getLessonId()), "Score %", "Lesson " + l.getLessonId());
+              }        
+              JFreeChart chart = ChartFactory.createBarChart("Student performance chart: " + s.getUserId(),"Lesson","Score %",dataset);
+              new ChartFramee(chart, "Student performance chart: " + s.getUserId());            
                  
               }
                  
            if(selected == 2){
-           
+              try {
+               DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+              for(Lesson l:course.getLessons()){
+                  dataset.addValue(ProgressManager.quizAverage(this.courseId, l.getLessonId()), "Average Score %", "Lesson " + l.getLessonId());
+              }        
+              JFreeChart chart = ChartFactory.createBarChart("Quiz averages per lesson: " + course.getTitle(),"Lesson","Average Score %",dataset);
+              new ChartFramee(chart, "Quiz averages per lesson: " + course.getTitle());
+           }catch (IOException ex) {
+                          Logger.getLogger(InsightsPanel.class.getName()).log(Level.SEVERE, null, ex);
+                      }
            }
            if(selected == 3){
                       try {
                           DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                           for(Lesson l:course.getLessons()){
-                              dataset.addValue(ProgressManager.percentageCompletion(this.courseId, l.getLessonId()), "Percentage %", "Lesson " + l.getLessonId());
-                              System.out.println(ProgressManager.percentageCompletion(this.courseId, l.getLessonId()));
+                              dataset.addValue(ProgressManager.percentageCompletion(this.courseId, l.getLessonId()), "Percentage of Students%", "Lesson " + l.getLessonId());
                           }
-                          JFreeChart chart = ChartFactory.createBarChart(" Completion percentages: " + course.getTitle(),"Lesson","Percentage %",dataset);
+                          JFreeChart chart = ChartFactory.createBarChart(" Completion percentages: " + course.getTitle(),"Lesson","Percentage of Students %",dataset);
                           new ChartFramee(chart, "Completion Percentage " + course.getTitle());
                       } catch (IOException ex) {
                           Logger.getLogger(InsightsPanel.class.getName()).log(Level.SEVERE, null, ex);

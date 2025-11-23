@@ -103,6 +103,20 @@ public class StudentManager {
                return  temp.get(i).isIsComplete();
         return flag;
      }
+    public float maxScore(int id){
+        int max =0;
+        int total=0;
+          ArrayList<QuizAttempt> q = s.getQuizAttempts();
+          for(QuizAttempt temp: q){
+             if(temp.getLessonID()== id){
+                 total = temp.getTotalQuestions();
+                 if(temp.getScore()> max)
+                     max = temp.getScore();
+             }
+          }
+          float percent = (max * 100f)/ total;
+          return percent;
+    }
     
     private void updateStudentInJson() throws IOException {
         ArrayList<User> users = JsonDatabaseManager.loadUsers();
