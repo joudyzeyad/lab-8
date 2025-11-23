@@ -5,11 +5,13 @@
 package lab7.frontend;
 
 import java.awt.BorderLayout;
+import java.awt.print.PrinterException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import lab7.Student;
-import lab7.StudentManager;
+import javax.swing.JOptionPane;
+import lab7.*;
 
 /**
  *
@@ -47,6 +49,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         viewEnrolled = new javax.swing.JButton();
         Logout = new javax.swing.JButton();
+        certButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +77,13 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        certButton.setText("Certificate Earned");
+        certButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                certButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
@@ -85,13 +95,18 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                 .addComponent(viewEnrolled, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
             .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(jLabel1)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addComponent(jLabel1))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(Logout)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Logout)
-                .addGap(178, 178, 178))
+                .addComponent(certButton)
+                .addGap(205, 205, 205))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,10 +119,12 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                         .addGap(94, 94, 94)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(viewCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(viewEnrolled, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                            .addComponent(viewEnrolled, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(certButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
                 .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
+                .addGap(86, 86, 86))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,7 +141,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,12 +193,43 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LogoutActionPerformed
 
+    private void certButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_certButtonActionPerformed
+        try {
+            ArrayList<Course> enrolledCourses = sm.viewEnrolled();
+            if (enrolledCourses==null)
+                JOptionPane.showMessageDialog(this, "No Certificates Earned!");
+            else{
+                ArrayList<Course>passedCourses=new ArrayList<>();
+                for(int i=0;i<enrolledCourses.size();i++)
+                {
+                    if (enrolledCourses.get(i).isCompletedBy(s))
+                       passedCourses.add(enrolledCourses.get(i));
+                }
+                if (passedCourses==null) {
+                  JOptionPane.showMessageDialog(this, "No Certificates Earned!");
+                 
+                }
+                else{
+                CertificatePanel cf = new CertificatePanel(s,passedCourses);
+                contentPanel.removeAll();
+                contentPanel.add(cf, java.awt.BorderLayout.CENTER);
+                contentPanel.revalidate();
+                contentPanel.repaint();
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(StudentDashboardFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_certButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Logout;
+    private javax.swing.JButton certButton;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton viewCourses;

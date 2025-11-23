@@ -21,6 +21,7 @@ public class Course {
     private String status;
     private ArrayList<Lesson> lessons = new ArrayList<>();
     private ArrayList<Student> students= new ArrayList<>();
+    private Certificate c;
 
     public Course(int courseID, int instructorID, String title, String description,String status) {
         this.courseID = courseID;
@@ -32,6 +33,15 @@ public class Course {
 
     public Course() {
     }
+
+    public Certificate getCertificate() {
+        return c;
+    }
+
+    public void setCertificate(Certificate c) {
+        this.c = c;
+    }
+    
     
     public String getStatus() {
         return status;
@@ -106,5 +116,15 @@ public class Course {
       }
       return null;
     }
-    
+    public boolean isCompletedBy(Student s) {
+    for (Lesson lesson : lessons) {
+        if (!s.hasPassedLesson(lesson.getLessonId())) {
+            return false;  //Found a lesson not passed
+        }
+    }
+    return true; // All lessons passed
+}
+    public static boolean isCourseCompleted(Student s, Course c) {
+    return c.isCompletedBy(s);
+}   
 }

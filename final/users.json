@@ -4,7 +4,8 @@
     "createdCourses": [
       10,
       9603,
-      666
+      666,
+      12
     ],
     "userId": 2,
     "email": "salma@gmail.com",
@@ -20,6 +21,7 @@
       "lessonID": 1,
       "passed": false
     }],
+    "certificates": [],
     "enrolledCourses": [99999],
     "progress": [
       {
@@ -41,6 +43,7 @@
   {
     "role": "student",
     "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [99999],
     "progress": [
       {
@@ -106,6 +109,7 @@
         "passed": true
       }
     ],
+    "certificates": [],
     "enrolledCourses": [
       10,
       99999,
@@ -141,6 +145,7 @@
   {
     "role": "student",
     "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [
       10,
       99999,
@@ -186,11 +191,54 @@
   {
     "role": "student",
     "quizAttempts": [],
+    "certificates": [],
     "enrolledCourses": [],
     "progress": [],
     "userId": 9457,
     "email": "f@g.c",
     "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
     "username": "fa"
+  },
+  {
+    "role": "student",
+    "quizAttempts": [
+      {
+        "attemptNumber": 1,
+        "score": 2,
+        "totalQuestions": 2,
+        "lessonID": 1,
+        "passed": true
+      },
+      {
+        "attemptNumber": 2,
+        "score": 2,
+        "totalQuestions": 2,
+        "lessonID": 1,
+        "passed": true
+      }
+    ],
+    "certificates": [{
+      "studentId": 9458,
+      "certificateId": "CERT-99999-9458",
+      "issueDate": "2025-11-23",
+      "courseId": 99999
+    }],
+    "enrolledCourses": [99999],
+    "progress": [
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 99999
+      },
+      {
+        "Complete": false,
+        "lessonId": 2,
+        "courseId": 99999
+      }
+    ],
+    "userId": 9458,
+    "email": "m@m.com",
+    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "username": "malak"
   }
 ]
