@@ -62,6 +62,7 @@ public class MarkLessons extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        quizButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,6 +99,13 @@ public class MarkLessons extends javax.swing.JPanel {
             }
         });
 
+        quizButton.setText("Take Quiz");
+        quizButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quizButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +117,9 @@ public class MarkLessons extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(163, 163, 163)
-                        .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(quizButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,7 +131,9 @@ public class MarkLessons extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(quizButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,11 +180,66 @@ public class MarkLessons extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void quizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a lesson.");
+            return;
+        }
+        
+        int lessonId = (int) jTable1.getValueAt(selectedRow, 1);
+        
+        Lesson selectedLesson = null;
+        try {
+            for (Lesson l : sm.lessonList(courseID)) {
+                if (l.getLessonId() == lessonId) {
+                    selectedLesson = l;
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error loading lesson");
+            return;
+        }
+        
+        if (selectedLesson == null) {
+            JOptionPane.showConfirmDialog(this, "Lesson not found");
+            return;
+        }
+        
+        try {
+            if (!sm.canAccessLesson(courseID, lessonId)) {
+                JOptionPane.showMessageDialog(this, "You must complete previous lessons before taking this quiz !", "Access Denied", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error checking lesson access");
+            return;
+        }
+        
+        if (!sm.canAttemptQuiz(lessonId)) {
+            JOptionPane.showMessageDialog(this, "You have reached the maximum number of attempts for this quiz !", "Max Attempts Reached", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        QuizPanel qp = new QuizPanel(sm, s, courseID, selectedLesson);
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+        
+        if (window instanceof javax.swing.JFrame frame) {
+        frame.setContentPane(qp);
+        frame.revalidate();
+        frame.repaint();
+    }
+    }//GEN-LAST:event_quizButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton quizButton;
     // End of variables declaration//GEN-END:variables
 }

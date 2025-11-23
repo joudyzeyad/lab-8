@@ -100,9 +100,23 @@ public class StudentManager {
         boolean flag = false;
         for(i=0;i<temp.size();++i)
             if(temp.get(i).getlID()== lId)
-               flag =  temp.get(i).isIsComplete();
+               return  temp.get(i).isIsComplete();
         return flag;
      }
+    public float maxScore(int id){
+        int max =0;
+        int total=0;
+          ArrayList<QuizAttempt> q = s.getQuizAttempts();
+          for(QuizAttempt temp: q){
+             if(temp.getLessonID()== id){
+                 total = temp.getTotalQuestions();
+                 if(temp.getScore()> max)
+                     max = temp.getScore();
+             }
+          }
+          float percent = (max * 100f)/ total;
+          return percent;
+    }
     
     private void updateStudentInJson() throws IOException {
         ArrayList<User> users = JsonDatabaseManager.loadUsers();
@@ -190,19 +204,27 @@ public class StudentManager {
             }
         }
         
-        if (attemptNumber > quiz.getMaxAttempts() && !passed) {
-            QuizAttempt a = new QuizAttempt(lessonID, score, total, false, attemptNumber); //passed = false to mark attempt as failed due to exceeded number of maxAttempts
-            s.getQuizAttempts().add(a);
-            updateStudentInJson();
-            return a;
+        if (attemptNumber > quiz.getMaxAttempts()) {
+            throw new IOException("Maximum attempts exceeded for this quiz");
         }
         else {
             QuizAttempt a = new QuizAttempt(lessonID, score, total, passed, attemptNumber);
             s.getQuizAttempts().add(a);
             
             if (passed) {
-                l.setIsComplete(true);
-                JsonDatabaseManager.saveCourse(courses);
+                boolean found = false;
+                
+                for (int i = 0 ; i < s.getProgress().size() ; i++) {
+                    if (s.getProgress().get(i).getcID() == courseID && s.getProgress().get(i).getlID() == lessonID) {
+                        s.getProgress().get(i).setIsComplete(true);
+                        found = true;
+                        break;
+                    }
+                }
+                
+                if (!found) {
+                    s.getProgress().add(new LessonProgress(courseID, lessonID, true));
+                }
             }
             
             updateStudentInJson();
@@ -223,12 +245,36 @@ public class StudentManager {
                         }
                         else { //must check that previous lesson is passed
                             Lesson previous = c.getLessons().get(j - 1);
-                            return previous.isComplete() || alreadyPassed(previous.getLessonId());
+                            return isComplete(courseID, previous.getLessonId());
                         }
                     }
                 }
             }
         }
         return false;
+    }
+    
+    public boolean canAttemptQuiz(int lessonID) {
+        int attempts = 0;
+        
+        for (QuizAttempt a : s.getQuizAttempts()) {
+            if (a.getLessonID() == lessonID) {
+                attempts = Math.max(attempts, a.getAttemptNumber());
+            }
+        }
+        
+        try {
+            for (Course course : viewEnrolled()) {
+                for (Lesson l : course.getLessons()) {
+                    if (l.getLessonId() == lessonID) {
+                        int maxAttempts = l.getQuiz().getMaxAttempts();
+                        return attempts < maxAttempts;  
+                    }
+                }
+            }           
+        } catch (IOException ex) {
+            return false;
+        }
+        return true;
     }
 }

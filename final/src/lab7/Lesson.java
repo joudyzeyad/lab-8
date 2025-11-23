@@ -17,7 +17,6 @@ public class Lesson {
     private String title;
     private String content;
     private ArrayList<String> resources;
-    private boolean isComplete;
     private Quiz quiz;
 
     public Lesson(int lessonId, String title, String content) {
@@ -25,7 +24,6 @@ public class Lesson {
         this.title = title;
         this.content = content;
         this.resources = new ArrayList<>();
-        this.isComplete=false;
         this.quiz = null;
     }
     public Lesson() {
@@ -38,12 +36,7 @@ public class Lesson {
         }
         resources.add(r);
     }
-    public boolean isComplete()
-    {
-        return isComplete;
-    }
-    
-
+   
     public int getLessonId() {
         return lessonId;
     }
@@ -75,10 +68,7 @@ public class Lesson {
     public void setResources(ArrayList<String> resources) {
         this.resources = resources;
     }
-    public void setIsComplete(boolean isComplete) {
-        this.isComplete = isComplete;
-    }
-
+    
     public Quiz getQuiz() {
         return quiz;
     }
