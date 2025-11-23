@@ -162,7 +162,11 @@ public class CertificatePanel extends javax.swing.JPanel {
             if (download.equals("PDF")) {
 
                 PDFCertificate pdf = new PDFCertificate(c);
-                pdf.createPDF();
+                try {
+                    pdf.createPDF();
+                } catch (IOException ex) {
+                    Logger.getLogger(CertificatePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 try {
                     JsonDatabaseManager.exportCertificateAsJson(c);
@@ -190,8 +194,9 @@ public class CertificatePanel extends javax.swing.JPanel {
             for(int i =0;i<certArr.size();i++)
             {
                 if(certArr.get(i).getCertificateId().equals(cId))
-                     c=certArr.get(i);
-                break;       
+                {   c=certArr.get(i);
+                break;
+                }
             }
         ViewCertificate v = new ViewCertificate(student,passedCourses,c);
         

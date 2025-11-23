@@ -21,7 +21,7 @@ public class PDFCertificate {
 
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Save Certificate as PDF");
-        chooser.setSelectedFile(new java.io.File("certificate.pdf"));
+        chooser.setSelectedFile(new java.io.File("certificate"+cert.getCertificateId()+".pdf"));
 
         int option = chooser.showSaveDialog(null);
         if (option != JFileChooser.APPROVE_OPTION) {
@@ -41,14 +41,14 @@ public class PDFCertificate {
             rect.setBorderWidth(3);
             canvas.rectangle(rect);
 
-            // ===== TITLE =====
+          
             Font titleFont = new Font(Font.HELVETICA, 28, Font.BOLD);
             Paragraph title = new Paragraph("Certificate of Completion", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             title.setSpacingAfter(40);
             document.add(title);
 
-            // ===== SUCCESS MESSAGE =====
+           
             Font successFont = new Font(Font.HELVETICA, 18, Font.NORMAL);
           
             ArrayList<User> users = JsonDatabaseManager.loadUsers();
@@ -75,8 +75,6 @@ public class PDFCertificate {
             document.add(new Paragraph("Course ID: " + cert.getCourseId(), bodyFont));
             document.add(new Paragraph("Issued on: " + cert.getIssueDate(), bodyFont));
 
-            // spacing
-            document.add(new Paragraph("\n\n\n"));
 
             document.close();
 
