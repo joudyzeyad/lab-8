@@ -162,36 +162,72 @@
     "courseId": 99999,
     "instructorID": 919191,
     "status": "APPROVED",
-    "lessons": [{
-      "quiz": {
-        "maxAttempts": 3,
-        "questions": [
-          {
-            "question": "What does OOP stand for?",
-            "options": [
-              "Object-Oriented Programming",
-              "Object-Only Programming",
-              "Operating On Programs",
-              "None of the above"
-            ],
-            "correctAns": 0
-          },
-          {
-            "question": "Which one is NOT a pillar of OOP?",
-            "options": [
-              "Encapsulation",
-              "Polymorphism",
-              "Compilation",
-              "Inheritance"
-            ],
-            "correctAns": 2
-          }
-        ]
+    "lessons": [
+      {
+        "quiz": {
+          "maxAttempts": 3,
+          "questions": [
+            {
+              "question": "What does OOP stand for?",
+              "options": [
+                "Object-Oriented Programming",
+                "Object-Only Programming",
+                "Operating On Programs",
+                "None of the above"
+              ],
+              "correctAns": 0
+            },
+            {
+              "question": "Which one is NOT a pillar of OOP?",
+              "options": [
+                "Encapsulation",
+                "Polymorphism",
+                "Compilation",
+                "Inheritance"
+              ],
+              "correctAns": 2
+            }
+          ]
+        },
+        "lessonId": 1,
+        "title": "Introduction",
+        "content": "Welcome"
       },
-      "lessonId": 1,
-      "title": "Introduction",
-      "content": "Welcome"
-    }]
+      {
+        "quiz": {
+          "maxAttempts": 3,
+          "questions": [
+            {
+              "question": "Abstraction is data hiding?",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAns": 1
+            },
+            {
+              "question": "Abstraction is a form of polymorphism",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAns": 0
+            },
+            {
+              "question": "Abstraction is an oop concept",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAns": 0
+            }
+          ]
+        },
+        "lessonId": 2,
+        "title": "Abstraction",
+        "content": "oop concepts"
+      }
+    ]
   },
   {
     "description": "math1",

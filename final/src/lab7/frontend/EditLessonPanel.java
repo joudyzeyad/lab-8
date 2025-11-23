@@ -4,8 +4,13 @@
  */
 package lab7.frontend;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import static javax.swing.SwingUtilities.getWindowAncestor;
 import lab7.JsonDatabaseManager;
 import lab7.*;
@@ -47,6 +52,7 @@ public class EditLessonPanel extends javax.swing.JPanel {
         titleField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        AddQuiz = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Edit Lesson");
@@ -70,6 +76,13 @@ public class EditLessonPanel extends javax.swing.JPanel {
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
+            }
+        });
+
+        AddQuiz.setText("Add Quiz");
+        AddQuiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddQuizActionPerformed(evt);
             }
         });
 
@@ -105,12 +118,16 @@ public class EditLessonPanel extends javax.swing.JPanel {
                                 .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(106, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addGap(39, 39, 39))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AddQuiz)
+                .addGap(192, 192, 192))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +156,9 @@ public class EditLessonPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saveButton)
                     .addComponent(backButton))
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(AddQuiz)
+                .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -209,6 +228,62 @@ public class EditLessonPanel extends javax.swing.JPanel {
 }
 
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void AddQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddQuizActionPerformed
+        try {
+            // TODO add your handling code here:
+            int id = Integer.parseInt(idField.getText());
+            // Load all courses
+            ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
+            
+            // Find the course that matches the panel's course title
+            Course courseToUpdate = null;
+            for (Course course : courses) {
+                if (course.getTitle().equalsIgnoreCase(this.courseTitle)) {
+                    courseToUpdate = course;
+                    break;
+                }
+            }
+            
+            if (courseToUpdate != null) {
+                ArrayList<Lesson> lessons = courseToUpdate.getLessons();
+                if (lessons != null) {
+                    boolean found = false;
+
+for (Lesson lesson : lessons) {
+
+    if (lesson.getLessonId() == id) {
+        found = true;
+        if (lesson.getQuiz() != null) {
+            JOptionPane.showMessageDialog(this, "Lesson already has a quiz");
+            return;
+        }
+
+        // Correct parent frame
+        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+        // OPEN THE DIALOG
+        AddQuiz dialog = new AddQuiz(parent, true);
+        dialog.setVisible(true);
+
+        Quiz quiz = dialog.returnQuiz();
+        lesson.setQuiz(quiz);
+
+        JsonDatabaseManager.saveCourse(courses);
+        JOptionPane.showMessageDialog(this, "Quiz saved.");
+        return;
+    }
+}
+
+if (!found) {
+    JOptionPane.showMessageDialog(this, "No lesson found with that ID.");
+}
+                }
+            }   } catch (IOException ex) {
+            Logger.getLogger(EditLessonPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_AddQuizActionPerformed
 public void loadLesson(Lesson l)
 {
      idField.setText(String.valueOf(l.getLessonId()));
@@ -218,6 +293,7 @@ public void loadLesson(Lesson l)
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddQuiz;
     private javax.swing.JButton backButton;
     private javax.swing.JTextField contentField;
     private javax.swing.JTextField idField;
