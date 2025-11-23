@@ -85,7 +85,7 @@ public class CoursesAddAndEdit extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Course Title", "CourseID", "InstructorID", "Description", "Lessons"
+                "Course Title", "CourseID", "InstructorID", "Description", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -159,6 +159,7 @@ public class CoursesAddAndEdit extends javax.swing.JPanel {
             try {
                 ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
                 EditCoursePanel editPanel = new EditCoursePanel();
+                if(courses.get(selectedRow).getStatus().equalsIgnoreCase("APPROVED")){
                 editPanel.loadCourse(courses.get(selectedRow));
                 java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
 
@@ -166,6 +167,9 @@ public class CoursesAddAndEdit extends javax.swing.JPanel {
                     frame.setContentPane(editPanel);
                     frame.revalidate();
                     frame.repaint();
+                }}
+                else{
+                   JOptionPane.showMessageDialog(this, "You can only edit in approved courses");  
                 }
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(CoursesAddAndEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -223,7 +227,7 @@ public void loadTable() throws IOException {
         ArrayList<Course> x = JsonDatabaseManager.loadCourses();
         for (int i = 0; i < x.size(); i++) {
             Course c = x.get(i);
-            m.addRow(new Object[]{c.getTitle(), c.getCourseID(), c.getInstructorID(), c.getDescription(), c.getLessons()});
+            m.addRow(new Object[]{c.getTitle(), c.getCourseID(), c.getInstructorID(), c.getDescription(), c.getStatus()});
 
         }
 }

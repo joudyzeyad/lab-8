@@ -295,9 +295,13 @@ public class ManageLessons extends javax.swing.JPanel {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String courseTitle = courseField.getText().trim();
 
-        ArrayList<Course> courses;
+        ArrayList<Course> temp;
+        ArrayList<Course> courses=new ArrayList<>();
         try {
-            courses = JsonDatabaseManager.loadCourses();
+            temp = JsonDatabaseManager.loadCourses();
+            for(int i=0;i<temp.size();++i)
+                if(temp.get(i).getStatus().equalsIgnoreCase("APPROVED"))
+                    courses.add(temp.get(i));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Error loading courses.");
             return;

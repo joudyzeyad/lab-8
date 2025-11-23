@@ -66,7 +66,8 @@
     "role": "instructor",
     "createdCourses": [
       1111,
-      33
+      33,
+      678678
     ],
     "userId": 5,
     "email": "j@.",
@@ -246,30 +247,19 @@
   },
   {
     "role": "student",
-    "quizAttempts": [
-      {
-        "attemptNumber": 1,
-        "score": 0,
-        "totalQuestions": 2,
-        "lessonID": 1,
-        "passed": false
-      },
-      {
-        "attemptNumber": 2,
-        "score": 0,
-        "totalQuestions": 2,
-        "lessonID": 1,
-        "passed": false
-      },
-      {
-        "attemptNumber": 3,
-        "score": 1,
-        "totalQuestions": 2,
-        "lessonID": 1,
-        "passed": false
-      }
-    ],
-    "certificates": [],
+    "quizAttempts": [{
+      "attemptNumber": 1,
+      "score": 2,
+      "totalQuestions": 2,
+      "lessonID": 1,
+      "passed": true
+    }],
+    "certificates": [{
+      "studentId": 9459,
+      "certificateId": "CERT-99999-9459",
+      "issueDate": "2025-11-23",
+      "courseId": 99999
+    }],
     "enrolledCourses": [99999],
     "progress": [{
       "Complete": true,
