@@ -126,7 +126,5 @@ public class Course {
 }
     public static boolean isCourseCompleted(Student s, Course c) {
     return c.isCompletedBy(s);
-}
-
-    
+}   
 }

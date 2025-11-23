@@ -200,12 +200,12 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No Certificates Earned!");
             else{
                 ArrayList<Course>passedCourses=new ArrayList<>();
-                for(int i=0;i<passedCourses.size();i++)
+                for(int i=0;i<enrolledCourses.size();i++)
                 {
                     if (enrolledCourses.get(i).isCompletedBy(s))
                        passedCourses.add(enrolledCourses.get(i));
                 }
-                if (enrolledCourses==null) {
+                if (passedCourses==null) {
                   JOptionPane.showMessageDialog(this, "No Certificates Earned!");
                  
                 }

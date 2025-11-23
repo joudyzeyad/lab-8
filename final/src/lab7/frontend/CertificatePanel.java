@@ -27,7 +27,7 @@ public class CertificatePanel extends javax.swing.JPanel {
     /**
      * Creates new form CertificatePanel
      */
-    public CertificatePanel(Student student, ArrayList<Course> passedCourses) {
+    public CertificatePanel(Student student, ArrayList<Course> passedCourses) throws IOException {
         initComponents();
         this.student = student;
         this.passedCourses = passedCourses;
@@ -105,17 +105,17 @@ public class CertificatePanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(downloadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(69, 69, 69))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(99, 99, 99)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -137,7 +137,7 @@ public class CertificatePanel extends javax.swing.JPanel {
     private void downloadBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadBoxActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
-
+        Certificate c=null;
         if (selectedRow == -1) {
             // No row selected
             JOptionPane.showMessageDialog(this, "Please select a course to download Certificate");
@@ -145,15 +145,18 @@ public class CertificatePanel extends javax.swing.JPanel {
         } else {
 
             String download = downloadBox.getSelectedItem().toString();
-            Certificate c = (Certificate) model.getValueAt(selectedRow, 1);
+            String cId = (String) model.getValueAt(selectedRow, 1);
+            ArrayList<Certificate> certArr=student.getCertificates();
+            for(int i =0;i<certArr.size();i++)
+            {
+                if(certArr.get(i).getCertificateId().equals(cId))
+                     c=certArr.get(i);
+                break;       
+            }
             if (download.equals("PDF")) {
 
                 PDFCertificate pdf = new PDFCertificate(c);
-                try {
-                    pdf.createPDF();
-                } catch (PrinterException ex) {
-                    Logger.getLogger(CertificatePanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                pdf.createPDF();
             } else {
                 try {
                     JsonDatabaseManager.exportCertificateAsJson(c);
@@ -166,18 +169,30 @@ public class CertificatePanel extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_downloadBoxActionPerformed
- 
-    
 
-    public void loadTable(ArrayList<Course> courses) {
-        DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
-        m.setRowCount(0);
-        for (int i = 0; i < courses.size(); i++) {
-            Course c = courses.get(i);
-            m.addRow(new Object[]{c.getTitle(), c.getCertificate()});
+    public void loadTable(ArrayList<Course> courses) throws IOException {
+    DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+    m.setRowCount(0);
+
+    for (Course c : courses) {
+        Certificate existingCert = null;
+
+        for (Certificate cert : student.getCertificates()) {
+            if (cert.getCourseId()==c.getCourseID()) {
+                existingCert = cert;
+                break;
+            }
         }
+        if (existingCert == null) {
+            existingCert = Certificate.generateCertificate(student, c);
+            student.getCertificates().add(existingCert); // Store it in student
+            c.setCertificate(existingCert);
+        } else {
+            c.setCertificate(existingCert);
+        }
+        m.addRow(new Object[]{c.getTitle(),c.getCertificate().getCertificateId()});
     }
-
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

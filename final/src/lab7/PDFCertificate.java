@@ -4,14 +4,22 @@
  */
 package lab7;
 
-import java.awt.*;
-import java.awt.print.*;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+import javax.swing.JFileChooser;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  *
  * @author Malak Mokhtar
  */
-public class PDFCertificate implements Printable{
+
+
+
+public class PDFCertificate {
 
     private Certificate cert;
 
@@ -19,35 +27,35 @@ public class PDFCertificate implements Printable{
         this.cert = cert;
     }
 
-    @Override
-    public int print(Graphics g, PageFormat pf, int page) throws PrinterException {
-        if (page > 0) {
-            return NO_SUCH_PAGE;
+    public void createPDF() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Save Certificate as PDF");
+        chooser.setSelectedFile(new java.io.File("certificate.pdf"));
+
+        int option = chooser.showSaveDialog(null);
+        if (option != JFileChooser.APPROVE_OPTION) {
+            return;
         }
 
-        Graphics2D g2 = (Graphics2D) g;
-        g2.translate(pf.getImageableX(), pf.getImageableY());
+        String filePath = chooser.getSelectedFile().getAbsolutePath();
 
-        g2.setFont(new Font("Serif", Font.BOLD, 24));
-        g2.drawString("Certificate of Completion", 100, 100);
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            document.open();
 
-        g2.setFont(new Font("Serif", Font.PLAIN, 18));
-        g2.drawString("Certificate ID: " + cert.getCertificateId(), 100, 160);
-        g2.drawString("Student ID: " + cert.getStudentId(), 100, 190);
-        g2.drawString("Course ID: " + cert.getCourseId(), 100, 220);
-        g2.drawString("Issued on: " + cert.getIssueDate(), 100, 250);
+            document.add(new Paragraph("Certificate of Completion\n\n"));
+            document.add(new Paragraph("Certificate ID: " + cert.getCertificateId()));
+            document.add(new Paragraph("Student ID: " + cert.getStudentId()));
+            document.add(new Paragraph("Course ID: " + cert.getCourseId()));
+            document.add(new Paragraph("Issued on: " + cert.getIssueDate()));
 
-        return PAGE_EXISTS;
-    }
+            document.close();
 
-    public void createPDF() throws PrinterException {
-        PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPrintable(this);
+            javax.swing.JOptionPane.showMessageDialog(null, "Certificate saved as PDF!");
 
-        // This opens a dialog for saving as PDF
-        if (job.printDialog()) {
-            job.print();
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
-    
 }

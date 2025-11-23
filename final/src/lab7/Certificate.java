@@ -60,31 +60,28 @@ public class Certificate {
     }
 
     
-public static boolean generateCertificate(Student s, Course c) throws IOException {
+public static Certificate generateCertificate(Student s, Course c) throws IOException {
     
    ArrayList<User> users=JsonDatabaseManager.loadUsers();
     ArrayList<Lesson> lessons=c.getLessons();
-    for (int i =0;i<lessons.size();i++) {
-        boolean passed = s.hasPassedLesson(lessons.get(i).getLessonId());
-        if (!passed) {
-            return false;  //at least one lesson is NOT passed
-        }
-    }
-    
-    for (Certificate cert :s.getCertificates()) {
-        if (cert.getCourseId()==c.getCourseID()) {
-            return false; // already has certificate
-        }
-    }
+    Student snew;
     Certificate newCert= new Certificate(
             "CERT-" + c.getCourseID() + "-" + s.getUserId(),
             s.getUserId(),
             c.getCourseID(),
             java.time.LocalDate.now().toString()
     );
-    s.addCertificate(newCert);
-    JsonDatabaseManager.saveUser(users);
-    return true;
-}
-   
+    for(int j=0;j<users.size();j++)
+    {
+       if(users.get(j).getUserId()==s.getUserId())
+       {
+            snew=(Student) users.get(j);
+            snew.addCertificate(newCert);
+            users.set(j, snew);
+         JsonDatabaseManager.saveUser(users);
+          break;
+           }     
+       }
+return newCert;    
+}     
 }
