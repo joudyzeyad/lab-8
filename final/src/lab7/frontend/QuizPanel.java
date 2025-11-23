@@ -50,6 +50,11 @@ public class QuizPanel extends javax.swing.JPanel {
         
         lessonTitleLabel.setText(lesson.getTitle()); //dynamic title generation
         loadQuestion();
+        
+        if (!sm.canAttemptQuiz(lesson.getLessonId())) {
+            submitButton.setEnabled(false);
+            submitButton.setText("Maximum attempts reached !");
+        }
     }
 
     /**
@@ -66,8 +71,8 @@ public class QuizPanel extends javax.swing.JPanel {
         questionsPanel = new javax.swing.JPanel();
         submitButton = new javax.swing.JButton();
 
-        lessonTitleLabel.setFont(new java.awt.Font("Book Antiqua", 2, 24)); // NOI18N
-        lessonTitleLabel.setText("               Quiz");
+        lessonTitleLabel.setFont(new java.awt.Font("Book Antiqua", 2, 28)); // NOI18N
+        lessonTitleLabel.setText("             Quiz");
 
         scrollPaneQuestions.setViewportView(questionsPanel);
 
@@ -95,17 +100,19 @@ public class QuizPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lessonTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollPaneQuestions)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollPaneQuestions))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(213, 213, 213)
-                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155)
+                .addComponent(lessonTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,7 +141,6 @@ public class QuizPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Please answer all questions", "Unanswered Questions" ,JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
             submittedAnswers.add(Integer.parseInt(selected.getActionCommand()));
         }
         
@@ -143,7 +149,7 @@ public class QuizPanel extends javax.swing.JPanel {
             attempt = sm.saveAttempt(courseID, lesson.getLessonId(), submittedAnswers);
         }
         catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error saving quiz attempt", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Quiz Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -162,6 +168,7 @@ public class QuizPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Your score : " + score + "/" + total + "\n" + "Status : " + status);
         
         showFeedback(quiz, submittedAnswers);
+
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void loadQuestion() {

@@ -190,11 +190,8 @@ public class StudentManager {
             }
         }
         
-        if (attemptNumber > quiz.getMaxAttempts() && !passed) {
-            QuizAttempt a = new QuizAttempt(lessonID, score, total, false, attemptNumber); //passed = false to mark attempt as failed due to exceeded number of maxAttempts
-            s.getQuizAttempts().add(a);
-            updateStudentInJson();
-            return a;
+        if (attemptNumber > quiz.getMaxAttempts()) {
+            throw new IOException("Maximum attempts exceeded for this quiz");
         }
         else {
             QuizAttempt a = new QuizAttempt(lessonID, score, total, passed, attemptNumber);
@@ -221,7 +218,6 @@ public class StudentManager {
         }
     }
     
-    
     public boolean canAccessLesson(int courseID,int lessonID) throws IOException {
         ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
         
@@ -242,5 +238,29 @@ public class StudentManager {
             }
         }
         return false;
+    }
+    
+    public boolean canAttemptQuiz(int lessonID) {
+        int attempts = 0;
+        
+        for (QuizAttempt a : s.getQuizAttempts()) {
+            if (a.getLessonID() == lessonID) {
+                attempts = Math.max(attempts, a.getAttemptNumber());
+            }
+        }
+        
+        try {
+            for (Course course : viewEnrolled()) {
+                for (Lesson l : course.getLessons()) {
+                    if (l.getLessonId() == lessonID) {
+                        int maxAttempts = l.getQuiz().getMaxAttempts();
+                        return attempts < maxAttempts;  
+                    }
+                }
+            }           
+        } catch (IOException ex) {
+            return false;
+        }
+        return true;
     }
 }

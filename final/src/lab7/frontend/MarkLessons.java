@@ -200,11 +200,27 @@ public class MarkLessons extends javax.swing.JPanel {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(MarkLessons.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error loading lesson");
+            return;
         }
         
         if (selectedLesson == null) {
             JOptionPane.showConfirmDialog(this, "Lesson not found");
+            return;
+        }
+        
+        try {
+            if (!sm.canAccessLesson(courseID, lessonId)) {
+                JOptionPane.showMessageDialog(this, "You must complete previous lessons before taking this quiz !", "Access Denied", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error checking lesson access");
+            return;
+        }
+        
+        if (!sm.canAttemptQuiz(lessonId)) {
+            JOptionPane.showMessageDialog(this, "You have reached the maximum number of attempts for this quiz !", "Max Attempts Reached", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
