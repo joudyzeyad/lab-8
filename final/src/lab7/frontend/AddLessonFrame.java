@@ -153,7 +153,7 @@ public class AddLessonFrame extends javax.swing.JPanel {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
-
+    System.out.println("SAVE BUTTON CLICKED");
     if (idField.getText().isEmpty() || titleTextField.getText().isEmpty() 
             || contentField.getText().isEmpty() ) {
         JOptionPane.showMessageDialog(this, "Error: You have to fill out all the fields");
@@ -180,13 +180,13 @@ public class AddLessonFrame extends javax.swing.JPanel {
         // Load courses safely
         ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
         for (Course course : courses) {
-            if (course.getTitle().equals(this.title)) {
+            if (course.getTitle().equalsIgnoreCase(this.title)) {
          
                 // Ensure lessons list is not null
                 if (course.getLessons() == null) {
                     course.setLessons(new ArrayList<>());
                 }
-
+                
                 course.getLessons().add(lesson);
 
                 // Save updated courses

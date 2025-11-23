@@ -64,7 +64,10 @@
   },
   {
     "role": "instructor",
-    "createdCourses": [1111],
+    "createdCourses": [
+      1111,
+      33
+    ],
     "userId": 5,
     "email": "j@.",
     "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
@@ -240,5 +243,49 @@
     "email": "m@m.com",
     "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
     "username": "malak"
+  },
+  {
+    "role": "student",
+    "quizAttempts": [
+      {
+        "attemptNumber": 1,
+        "score": 0,
+        "totalQuestions": 2,
+        "lessonID": 1,
+        "passed": false
+      },
+      {
+        "attemptNumber": 2,
+        "score": 0,
+        "totalQuestions": 2,
+        "lessonID": 1,
+        "passed": false
+      },
+      {
+        "attemptNumber": 3,
+        "score": 1,
+        "totalQuestions": 2,
+        "lessonID": 1,
+        "passed": false
+      }
+    ],
+    "certificates": [],
+    "enrolledCourses": [99999],
+    "progress": [{
+      "Complete": true,
+      "lessonId": 1,
+      "courseId": 99999
+    }],
+    "userId": 9459,
+    "email": "z@.",
+    "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
+    "username": "z"
+  },
+  {
+    "role": "Admin",
+    "userId": 9460,
+    "email": "jj@.",
+    "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
+    "username": "jj"
   }
 ]
