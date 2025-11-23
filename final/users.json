@@ -13,14 +13,26 @@
   },
   {
     "role": "student",
-    "quizAttempts": [],
-    "certificates": [],
-    "enrolledCourses": [99999],
-    "progress": [{
-      "Complete": true,
-      "lessonId": 1,
-      "courseId": 99999
+    "quizAttempts": [{
+      "attemptNumber": 1,
+      "score": 1,
+      "totalQuestions": 2,
+      "lessonID": 1,
+      "passed": false
     }],
+    "enrolledCourses": [99999],
+    "progress": [
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 99999
+      },
+      {
+        "Complete": true,
+        "lessonId": 2,
+        "courseId": 99999
+      }
+    ],
     "userId": 3,
     "email": "j@gml.com",
     "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
@@ -29,13 +41,19 @@
   {
     "role": "student",
     "quizAttempts": [],
-    "certificates": [],
     "enrolledCourses": [99999],
-    "progress": [{
-      "Complete": true,
-      "lessonId": 1,
-      "courseId": 99999
-    }],
+    "progress": [
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 99999
+      },
+      {
+        "Complete": true,
+        "lessonId": 2,
+        "courseId": 99999
+      }
+    ],
     "userId": 4,
     "email": "y@.",
     "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
@@ -65,8 +83,29 @@
   },
   {
     "role": "student",
-    "quizAttempts": [],
-    "certificates": [],
+    "quizAttempts": [
+      {
+        "attemptNumber": 1,
+        "score": 1,
+        "totalQuestions": 2,
+        "lessonID": 2,
+        "passed": true
+      },
+      {
+        "attemptNumber": 2,
+        "score": 1,
+        "totalQuestions": 2,
+        "lessonID": 2,
+        "passed": true
+      },
+      {
+        "attemptNumber": 3,
+        "score": 2,
+        "totalQuestions": 2,
+        "lessonID": 2,
+        "passed": true
+      }
+    ],
     "enrolledCourses": [
       10,
       99999,
@@ -87,6 +126,11 @@
         "Complete": true,
         "lessonId": 1,
         "courseId": 12
+      },
+      {
+        "Complete": true,
+        "lessonId": 2,
+        "courseId": 99999
       }
     ],
     "userId": 9453,
@@ -97,7 +141,6 @@
   {
     "role": "student",
     "quizAttempts": [],
-    "certificates": [],
     "enrolledCourses": [
       10,
       99999,
@@ -143,27 +186,11 @@
   {
     "role": "student",
     "quizAttempts": [],
-    "certificates": [],
     "enrolledCourses": [],
     "progress": [],
     "userId": 9457,
     "email": "f@g.c",
     "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
     "username": "fa"
-  },
-  {
-    "role": "student",
-    "quizAttempts": [],
-    "certificates": [],
-    "enrolledCourses": [99999],
-    "progress": [{
-      "Complete": true,
-      "lessonId": 1,
-      "courseId": 99999
-    }],
-    "userId": 9458,
-    "email": "m@m.com",
-    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "username": "malak"
   }
 ]

@@ -4,70 +4,111 @@
     "students": [
       {
         "role": "student",
-        "quizAttempts": [],
-        "certificates": [],
         "enrolledCourses": [99999],
-        "progress": [{
-          "Complete": false,
-          "lessonId": 1,
-          "courseId": 99999
-        }],
-        "userId": 3,
+        "progress": [
+          {
+            "Complete": true,
+            "lessonId": 1,
+            "courseId": 99999
+          },
+          {
+            "Complete": true,
+            "lessonId": 2,
+            "courseId": 99999
+          }
+        ],
+        "userId": 3333,
         "email": "j@gml.com",
         "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
         "username": "jj"
       },
       {
         "role": "student",
-        "quizAttempts": [],
-        "certificates": [],
-        "enrolledCourses": [],
-        "progress": [],
-        "userId": 4,
+        "enrolledCourses": [99999],
+        "progress": [
+          {
+            "Complete": true,
+            "lessonId": 1,
+            "courseId": 99999
+          },
+          {
+            "Complete": false,
+            "lessonId": 2,
+            "courseId": 99999
+          }
+        ],
+        "userId": 5555,
         "email": "y@.",
         "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
         "username": "yy"
-      },
-      {
-        "role": "student",
-        "quizAttempts": [],
-        "certificates": [],
-        "enrolledCourses": [99999],
-        "progress": [{
-          "Complete": false,
-          "lessonId": 1,
-          "courseId": 99999
-        }],
-        "userId": 4,
-        "email": "y@.",
-        "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
-        "username": "yy"
-      },
-      {
-        "role": "student",
-        "quizAttempts": [],
-        "certificates": [],
-        "enrolledCourses": [99999],
-        "progress": [{
-          "Complete": false,
-          "lessonId": 1,
-          "courseId": 99999
-        }],
-        "userId": 9458,
-        "email": "m@m.com",
-        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-        "username": "malak"
       }
     ],
-    "title": "NEW TEST COURSE TITLE",
+    "title": "Prog2",
     "courseId": 99999,
     "instructorID": 919191,
     "status": "APPROVED",
-    "lessons": [{
-      "lessonId": 1,
-      "title": "Introduction",
-      "content": "Welcome"
-    }]
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Introduction",
+        "content": "Welcome",
+        "quiz": {
+          "maxAttempts": 3,
+          "questions": [
+            {
+              "question": "What does OOP stand for?",
+              "options": [
+                "Object-Oriented Programming",
+                "Object-Only Programming",
+                "Operating On Programs",
+                "None of the above"
+              ],
+              "correctAns": 0
+            },
+            {
+              "question": "Which one is NOT a pillar of OOP?",
+              "options": [
+                "Encapsulation",
+                "Polymorphism",
+                "Compilation",
+                "Inheritance"
+              ],
+              "correctAns": 2
+            }
+          ]
+        }
+      },
+      {
+        "lessonId": 2,
+        "title": "Abstraction",
+        "content": "oop",
+        "quiz": {
+          "maxAttempts": 3,
+          "questions": [
+            {
+              "question": "What is abstraction?",
+              "options": [
+                "Hiding unnecessary details",
+                "Showing all code",
+                "Removing all methods",
+                "None of the above"
+              ],
+              "correctAns": 0
+            },
+            {
+              "question": "Which keyword is used for abstraction in Java?",
+              "options": [
+                "abstract",
+                "static",
+                "final",
+                "implements"
+              ],
+              "correctAns": 0
+            }
+          ]
+        }
+      }
+    ]
   },
   {
     "description": "math1",
