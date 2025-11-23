@@ -51,6 +51,7 @@ public class CertificatePanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         downloadBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        viewButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Student Completed Courses");
@@ -63,7 +64,7 @@ public class CertificatePanel extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Course Title", "Certificate Earned"
+                "Course Title", "Certificate ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -84,6 +85,13 @@ public class CertificatePanel extends javax.swing.JPanel {
 
         jLabel2.setText("Download");
 
+        viewButton.setText("Vew Certificate");
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,19 +100,14 @@ public class CertificatePanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(31, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(downloadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(69, 69, 69))))
+                        .addComponent(jButton1)
+                        .addGap(47, 47, 47)
+                        .addComponent(viewButton)
+                        .addGap(69, 69, 69)
+                        .addComponent(downloadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,23 +118,26 @@ public class CertificatePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(downloadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(downloadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewButton))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         JFrame frame = (JFrame) getWindowAncestor(this);
         frame.setContentPane(new StudentDashboardFrame(student).getContentPane());
         frame.revalidate();
         frame.repaint();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void downloadBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadBoxActionPerformed
@@ -170,6 +176,35 @@ public class CertificatePanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_downloadBoxActionPerformed
 
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+        Certificate c=null;
+        if (selectedRow == -1) {
+           
+            JOptionPane.showMessageDialog(this, "Please select a course to view Certificate");
+            return;
+        } else {  
+            String cId = (String) model.getValueAt(selectedRow, 1);
+            ArrayList<Certificate> certArr=student.getCertificates();
+            for(int i =0;i<certArr.size();i++)
+            {
+                if(certArr.get(i).getCertificateId().equals(cId))
+                     c=certArr.get(i);
+                break;       
+            }
+        ViewCertificate v = new ViewCertificate(student,passedCourses,c);
+        
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+
+        if (window instanceof javax.swing.JFrame frame) {
+            frame.setContentPane(v);
+            frame.revalidate();
+            frame.repaint();
+        }
+        }
+    }//GEN-LAST:event_viewButtonActionPerformed
+
     public void loadTable(ArrayList<Course> courses) throws IOException {
     DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
     m.setRowCount(0);
@@ -202,5 +237,6 @@ public class CertificatePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton viewButton;
     // End of variables declaration//GEN-END:variables
 }

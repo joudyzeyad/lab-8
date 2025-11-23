@@ -47,8 +47,8 @@ public class AddLessonFrame extends javax.swing.JPanel {
         titleTextField = new javax.swing.JTextField();
         contentField = new javax.swing.JTextField();
         resorcesField = new javax.swing.JTextField();
-        saveButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         addLEsson.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addLEsson.setText("Add Lesson");
@@ -61,17 +61,17 @@ public class AddLessonFrame extends javax.swing.JPanel {
 
         jLabel1.setText("Resources comma separated");
 
-        saveButton.setText("Save");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
-
         backButton.setText("Go Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -80,36 +80,36 @@ public class AddLessonFrame extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(resorcesField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addLEsson, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(idLabel)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Co)
-                                            .addComponent(titleButton))))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(contentField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(28, 28, 28)
+                        .addComponent(backButton)
+                        .addGap(227, 227, 227)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(resorcesField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(addLEsson, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(idLabel)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(6, 6, 6)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(Co)
+                                                .addComponent(titleButton))))
+                                    .addGap(33, 33, 33)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(contentField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(saveButton)
-                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,8 +135,8 @@ public class AddLessonFrame extends javax.swing.JPanel {
                     .addComponent(resorcesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
-                    .addComponent(backButton))
+                    .addComponent(backButton)
+                    .addComponent(jButton1))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -152,20 +152,17 @@ public class AddLessonFrame extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
-
-    if (idField.getText().isEmpty() || titleTextField.getText().isEmpty() 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ if (idField.getText().isEmpty() || titleTextField.getText().isEmpty() 
             || contentField.getText().isEmpty() ) {
         JOptionPane.showMessageDialog(this, "Error: You have to fill out all the fields");
         return;
     }
-
     try {
         String lessonTitle = titleTextField.getText().trim();
         int id = Integer.parseInt(idField.getText().trim());
         String content = contentField.getText().trim();
         String line = resorcesField.getText().trim();
-
         ArrayList<String> resources = new ArrayList<>();
         if (!line.isEmpty()) {
             String[] arr = line.split(",");
@@ -173,10 +170,8 @@ public class AddLessonFrame extends javax.swing.JPanel {
                 resources.add(r.trim());
             }
         }
-
         Lesson lesson = new Lesson(id, lessonTitle, content);
         lesson.setResources(resources);
-
         // Load courses safely
         ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
         for (Course course : courses) {
@@ -186,27 +181,22 @@ public class AddLessonFrame extends javax.swing.JPanel {
                 if (course.getLessons() == null) {
                     course.setLessons(new ArrayList<>());
                 }
-
                 course.getLessons().add(lesson);
-
                 // Save updated courses
                 JsonDatabaseManager.saveCourse(courses);
                 JOptionPane.showMessageDialog(this, "Lesson saved successfully!");
                 break;
             }
         }
-
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Invalid Lesson ID. It must be a number.");
     } catch (IOException e) {
         JOptionPane.showMessageDialog(this, "Error saving lesson. Try again later.");
-        e.printStackTrace();
-    
+        e.printStackTrace();  
 }  
-            
-           
-         
-    }                                          
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+                                         
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -216,9 +206,9 @@ public class AddLessonFrame extends javax.swing.JPanel {
     private javax.swing.JTextField contentField;
     private javax.swing.JTextField idField;
     private javax.swing.JLabel idLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField resorcesField;
-    private javax.swing.JButton saveButton;
     private javax.swing.JLabel titleButton;
     private javax.swing.JTextField titleTextField;
     // End of variables declaration//GEN-END:variables

@@ -179,7 +179,7 @@ public class EditLessonPanel extends javax.swing.JPanel {
     // Find the course that matches the panel's course title
     Course courseToUpdate = null;
     for (Course course : courses) {
-        if (course.getTitle().equals(this.courseTitle)) {
+        if (course.getTitle().equals(courseTitle)) {
             courseToUpdate = course;
             break;
         }
