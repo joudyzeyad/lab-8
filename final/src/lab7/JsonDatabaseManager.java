@@ -314,16 +314,30 @@ public class JsonDatabaseManager {
         if (c.getStudents().size() != 0) {
             ArrayList<Student> s = c.getStudents();
             JSONArray temparr = new JSONArray();
-            int i;
             for (int si = 0; si < s.size(); ++si) {
                 JSONObject student = userToJson(s.get(si));
+                if (s.get(si).getQuizAttempts() != null) {
+                    JSONArray qa = new JSONArray();
+                    for (QuizAttempt a : s.get(si).getQuizAttempts()) {
+                        JSONObject at = new JSONObject();
+                        at.put("lessonID", a.getLessonID());
+                        at.put("score", a.getScore());
+                        at.put("totalQuestions", a.getTotalQuestions());
+                        at.put("passed", a.isPassed());
+                        at.put("attemptNumber", a.getAttemptNumber());
+                        qa.put(at);
+                    }
+                    student.put("quizAttempts", qa);
+                    
+                }
                 temparr.put(student);
-            }
+                
+        }
             obj.put("students", temparr);
         }
-
         return obj;
     }
+   
 
     public static void saveUser(ArrayList<User> u) throws IOException {
         JSONArray user = new JSONArray();

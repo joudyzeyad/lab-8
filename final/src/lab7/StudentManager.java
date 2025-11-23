@@ -142,6 +142,21 @@ public class StudentManager {
         JsonDatabaseManager.saveCourse(courses);
     }
     
+    private void updateStudentInsideCourses() throws IOException {
+    ArrayList<Course> courses = JsonDatabaseManager.loadCourses();
+
+    for (Course c : courses) {
+        for (int i = 0; i < c.getStudents().size(); i++) {
+            if (c.getStudents().get(i).getUserId() == s.getUserId()) {
+                c.getStudents().set(i, s);  // Replace old student with updated one
+            }
+        }
+    }
+
+    JsonDatabaseManager.saveCourse(courses);
+}
+
+    
     public boolean alreadyPassed(int lessonID) {
         for (int i = 0 ; i < s.getQuizAttempts().size() ; i++) {
             if (s.getQuizAttempts().get(i).getLessonID() == lessonID && s.getQuizAttempts().get(i).isPassed()) {
@@ -228,6 +243,8 @@ public class StudentManager {
             }
             
             updateStudentInJson();
+            updateStudentInsideCourses();
+
             return a;
         }
     }
