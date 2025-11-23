@@ -60,7 +60,6 @@ public class MarkLessons extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         quizButton = new javax.swing.JButton();
 
@@ -85,13 +84,6 @@ public class MarkLessons extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Mark as complete");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Go back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,14 +104,12 @@ public class MarkLessons extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(163, 163, 163)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(quizButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147)
+                        .addComponent(quizButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,42 +118,12 @@ public class MarkLessons extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(quizButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(quizButton))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-          int selectedRow = jTable1.getSelectedRow();
-
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a lesson.");
-            return;
-        }
-
-        int lessonId = (int) jTable1.getValueAt(selectedRow, 1);
-
-        try {
-            boolean updated = sm.markLessonCompleted(courseID, lessonId);
-
-            if (updated) {
-                JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Lesson already completed!");
-            }
-
-            loadTable(sm.lessonList(courseID));
-
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error saving progress");
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
@@ -219,6 +179,11 @@ public class MarkLessons extends javax.swing.JPanel {
             return;
         }
         
+        if (selectedLesson.getQuiz() == null || selectedLesson.getQuiz().getQuestions() == null || selectedLesson.getQuiz().getQuestions().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "This lesson has no quiz", "Quiz Not Found", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         if (!sm.canAttemptQuiz(lessonId)) {
             JOptionPane.showMessageDialog(this, "You have reached the maximum number of attempts for this quiz !", "Max Attempts Reached", JOptionPane.WARNING_MESSAGE);
             return;
@@ -228,15 +193,17 @@ public class MarkLessons extends javax.swing.JPanel {
         java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
         
         if (window instanceof javax.swing.JFrame frame) {
-        frame.setContentPane(qp);
-        frame.revalidate();
-        frame.repaint();
-    }
+            frame.setContentPane(qp);
+            frame.revalidate();
+            frame.repaint();
+            frame.setMinimumSize(new java.awt.Dimension(900,700));
+            frame.setSize(900, 700);
+            frame.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_quizButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

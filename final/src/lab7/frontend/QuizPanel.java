@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -36,17 +38,26 @@ public class QuizPanel extends javax.swing.JPanel {
     private ArrayList<JLabel> questionLabels = new ArrayList<>();
     private ArrayList<ButtonGroup> optionGroups = new ArrayList<>();
     private ArrayList<JLabel> feedbackLabels = new ArrayList<>();
+    private java.awt.Dimension previousSize;
+    
     /**
      * Creates new form QuizPanel
      */
     public QuizPanel(StudentManager sm, Student s, int courseID, Lesson lesson) {
         initComponents();
+        setPreferredSize(new java.awt.Dimension(900,700));
         questionsPanel.setLayout(new javax.swing.BoxLayout(questionsPanel, javax.swing.BoxLayout.Y_AXIS));
         scrollPaneQuestions.setViewportView(questionsPanel);
         this.sm = sm;
         this.s = s;
         this.courseID = courseID;
         this.lesson = lesson;
+        
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+        if (window instanceof javax.swing.JFrame frame) {
+            previousSize = frame.getSize();
+        }
+        
         
         lessonTitleLabel.setText(lesson.getTitle()); //dynamic title generation
         loadQuestion();
@@ -70,6 +81,7 @@ public class QuizPanel extends javax.swing.JPanel {
         scrollPaneQuestions = new javax.swing.JScrollPane();
         questionsPanel = new javax.swing.JPanel();
         submitButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         lessonTitleLabel.setFont(new java.awt.Font("Book Antiqua", 2, 28)); // NOI18N
         lessonTitleLabel.setText("             Quiz");
@@ -96,24 +108,31 @@ public class QuizPanel extends javax.swing.JPanel {
             }
         });
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollPaneQuestions))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addComponent(lessonTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPaneQuestions)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,8 +141,10 @@ public class QuizPanel extends javax.swing.JPanel {
                 .addComponent(lessonTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(scrollPaneQuestions, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -168,8 +189,38 @@ public class QuizPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Your score : " + score + "/" + total + "\n" + "Status : " + status);
         
         showFeedback(quiz, submittedAnswers);
+        
+        for (ButtonGroup group : optionGroups) {
+            var buttons = group.getElements();
+            while (buttons.hasMoreElements()) {
+                JRadioButton b = (JRadioButton) buttons.nextElement();
+                b.setEnabled(false);
+            }
+        }
 
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+        
+        if (window instanceof javax.swing.JFrame frame) {
+            if (previousSize != null) {
+                frame.setSize(previousSize);
+                frame.setPreferredSize(previousSize);
+            }
+            
+            frame.getContentPane().removeAll();
+            try {
+                frame.setContentPane(new lab7.frontend.MarkLessons(courseID, sm, s));
+            } catch (IOException ex) {
+                Logger.getLogger(QuizPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            frame.revalidate();
+            frame.repaint();
+            frame.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void loadQuestion() {
         Quiz quiz = this.lesson.getQuiz();
@@ -223,7 +274,7 @@ public class QuizPanel extends javax.swing.JPanel {
             
             if (submittedAnswer == correctAnswer) {
                 feedback.setText("Correct !");
-                feedback.setForeground(Color.GREEN);
+                feedback.setForeground(new Color(0, 128, 0));
             }
             else {
                 feedback.setText("Wrong - Correct Answer : " + q.getOptions().get(correctAnswer));
@@ -233,6 +284,7 @@ public class QuizPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel lessonTitleLabel;
     private javax.swing.JPanel questionsPanel;
     private javax.swing.JScrollPane scrollPaneQuestions;
