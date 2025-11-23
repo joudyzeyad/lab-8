@@ -247,25 +247,41 @@
   },
   {
     "role": "student",
-    "quizAttempts": [{
-      "attemptNumber": 1,
-      "score": 2,
-      "totalQuestions": 2,
-      "lessonID": 1,
-      "passed": true
-    }],
+    "quizAttempts": [
+      {
+        "attemptNumber": 1,
+        "score": 2,
+        "totalQuestions": 2,
+        "lessonID": 1,
+        "passed": true
+      },
+      {
+        "attemptNumber": 1,
+        "score": 2,
+        "totalQuestions": 3,
+        "lessonID": 2,
+        "passed": true
+      }
+    ],
     "certificates": [{
       "studentId": 9459,
       "certificateId": "CERT-99999-9459",
-      "issueDate": "2025-11-23",
+      "issueDate": "2025-11-24",
       "courseId": 99999
     }],
     "enrolledCourses": [99999],
-    "progress": [{
-      "Complete": true,
-      "lessonId": 1,
-      "courseId": 99999
-    }],
+    "progress": [
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 99999
+      },
+      {
+        "Complete": true,
+        "lessonId": 2,
+        "courseId": 99999
+      }
+    ],
     "userId": 9459,
     "email": "z@.",
     "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
