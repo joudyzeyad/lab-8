@@ -1,0 +1,204 @@
+[
+  {
+    "description": "object oriented programming",
+    "students": [
+      {
+        "role": "student",
+        "quizAttempts": [],
+        "certificates": [],
+        "enrolledCourses": [99999],
+        "progress": [
+          {
+            "Complete": false,
+            "lessonId": 1,
+            "courseId": 99999
+          },
+          {
+            "Complete": false,
+            "lessonId": 2,
+            "courseId": 99999
+          }
+        ],
+        "userId": 9458,
+        "email": "m@m.com",
+        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "username": "malak"
+      },
+      {
+        "role": "student",
+        "quizAttempts": [],
+        "certificates": [],
+        "enrolledCourses": [],
+        "progress": [],
+        "userId": 9459,
+        "email": "z@.",
+        "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
+        "username": "z"
+      },
+      {
+        "role": "student",
+        "quizAttempts": [
+          {
+            "attemptNumber": 1,
+            "score": 0,
+            "totalQuestions": 2,
+            "lessonID": 1,
+            "passed": false
+          },
+          {
+            "attemptNumber": 2,
+            "score": 1,
+            "totalQuestions": 2,
+            "lessonID": 1,
+            "passed": true
+          },
+          {
+            "attemptNumber": 3,
+            "score": 2,
+            "totalQuestions": 2,
+            "lessonID": 1,
+            "passed": true
+          }
+        ],
+        "certificates": [],
+        "enrolledCourses": [99999],
+        "progress": [{
+          "Complete": true,
+          "lessonId": 1,
+          "courseId": 99999
+        }],
+        "userId": 9461,
+        "email": "ra@gmail.com",
+        "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "username": "ranaaaa"
+      },
+      {
+        "role": "student",
+        "quizAttempts": [
+          {
+            "attemptNumber": 1,
+            "score": 2,
+            "totalQuestions": 2,
+            "lessonID": 1,
+            "passed": true
+          },
+          {
+            "attemptNumber": 1,
+            "score": 2,
+            "totalQuestions": 2,
+            "lessonID": 2,
+            "passed": true
+          }
+        ],
+        "certificates": [],
+        "enrolledCourses": [99999],
+        "progress": [
+          {
+            "Complete": true,
+            "lessonId": 1,
+            "courseId": 99999
+          },
+          {
+            "Complete": true,
+            "lessonId": 2,
+            "courseId": 99999
+          }
+        ],
+        "userId": 9462,
+        "email": "z@.",
+        "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
+        "username": "zzzz"
+      }
+    ],
+    "title": "Prog2",
+    "courseId": 99999,
+    "instructorID": 919191,
+    "status": "APPROVED",
+    "lessons": [
+      {
+        "quiz": {
+          "maxAttempts": 3,
+          "questions": [
+            {
+              "question": "What does OOP stand for?",
+              "options": [
+                "Object-Oriented Programming",
+                "Object-Only Programming",
+                "Operating On Programs",
+                "None of the above"
+              ],
+              "correctAns": 0
+            },
+            {
+              "question": "Which one is NOT a pillar of OOP?",
+              "options": [
+                "Encapsulation",
+                "Polymorphism",
+                "Compilation",
+                "Inheritance"
+              ],
+              "correctAns": 2
+            }
+          ]
+        },
+        "lessonId": 1,
+        "title": "Introduction",
+        "content": "Welcome"
+      },
+      {
+        "quiz": {
+          "maxAttempts": 3,
+          "questions": [
+            {
+              "question": "Is abstraction an oop concept?",
+              "options": [
+                "true",
+                "false"
+              ],
+              "correctAns": 0
+            },
+            {
+              "question": "Can an object be created from absstract class",
+              "options": [
+                "yes",
+                "no"
+              ],
+              "correctAns": 1
+            }
+          ]
+        },
+        "lessonId": 2,
+        "title": "Abstraction",
+        "content": "oop concepts"
+      }
+    ]
+  },
+  {
+    "description": "math1",
+    "title": "Math",
+    "courseId": 1111,
+    "instructorID": 5,
+    "status": "DECLINED"
+  },
+  {
+    "description": "testt",
+    "title": "farida",
+    "courseId": 9603,
+    "instructorID": 2,
+    "status": "APPROVED"
+  },
+  {
+    "description": "intro to c",
+    "title": "prog1",
+    "courseId": 33,
+    "instructorID": 5,
+    "status": "PENDING"
+  },
+  {
+    "description": "testing status",
+    "title": "test",
+    "courseId": 678678,
+    "instructorID": 5,
+    "status": "PENDING"
+  }
+]
