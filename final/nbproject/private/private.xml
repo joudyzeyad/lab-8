@@ -3,21 +3,41 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/ManageCourses.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/SignUpFrame.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/ViewCoursesAvailable.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/JsonDatabaseManager.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/LoginFrame.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/InstructorDashboardFrame.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/MarkLessons.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/Course.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/Instructor.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/Admin.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/AuthenticationManager.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/CoursesAddAndEdit.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/EditCoursePanel.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/AdminDashboardFrame.java</file>
-            <file>file:/C:/Users/farida%20helal/OneDrive/Documents/NetBeansProjects/labb8/lab-8/final/src/lab7/frontend/AdminViewCourses.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/LoginFrame.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/JsonDatabaseManager.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/AddLessonFrame.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/QuizAttempt.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/AuthenticationManager.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/AdminViewCourses.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/SignUpFrame.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/LessonProgress.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/User.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/EditLessonPanel.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/Lab7.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/ViewEnrolledCourses.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/ManageLessons.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/PDFCertificate.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/AddQuiz.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/InstructorDashboardFrame.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/InsightsPanel.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/Course.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/PasswordHasher.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/ViewCoursePanel.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/StudentManager.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/Lesson.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/Question.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/ManageCourses.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/CertificatePanel.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/Student.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/ProgressManager.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/StudentDashboardFrame.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/CoursesAddAndEdit.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/AdminDashboardFrame.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/MarkLessons.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/ViewCoursesAvailable.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/Quiz.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/ChartFramee.java</file>
+            <file>file:/C:/Users/Joudy/Desktop/lab%208/lab-8/final/src/lab7/frontend/AddCoursePanel.java</file>
         </group>
     </open-files>
 </project-private>

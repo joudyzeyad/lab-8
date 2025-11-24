@@ -14,45 +14,17 @@
   },
   {
     "role": "student",
-    "quizAttempts": [{
-      "attemptNumber": 1,
-      "score": 1,
-      "totalQuestions": 2,
-      "lessonID": 1,
-      "passed": false
-    }],
-    "certificates": [],
-    "enrolledCourses": [99999],
-    "progress": [
-      {
-        "Complete": true,
-        "lessonId": 1,
-        "courseId": 99999
-      },
-      {
-        "Complete": true,
-        "lessonId": 2,
-        "courseId": 99999
-      }
-    ],
-    "userId": 3,
-    "email": "j@gml.com",
-    "passwordHash": "0025973bb03c0332e769a595713acdd3d542080052a504afe0fa9a6185d7a304",
-    "username": "jj"
-  },
-  {
-    "role": "student",
     "quizAttempts": [],
     "certificates": [],
     "enrolledCourses": [99999],
     "progress": [
       {
-        "Complete": true,
+        "Complete": false,
         "lessonId": 1,
         "courseId": 99999
       },
       {
-        "Complete": true,
+        "Complete": false,
         "lessonId": 2,
         "courseId": 99999
       }
@@ -102,14 +74,7 @@
         "attemptNumber": 2,
         "score": 1,
         "totalQuestions": 2,
-        "lessonID": 2,
-        "passed": true
-      },
-      {
-        "attemptNumber": 3,
-        "score": 2,
-        "totalQuestions": 2,
-        "lessonID": 2,
+        "lessonID": 1,
         "passed": true
       }
     ],
@@ -136,7 +101,7 @@
         "courseId": 12
       },
       {
-        "Complete": true,
+        "Complete": false,
         "lessonId": 2,
         "courseId": 99999
       }
@@ -145,37 +110,6 @@
     "email": "r@gmail.com",
     "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
     "username": "rana"
-  },
-  {
-    "role": "student",
-    "quizAttempts": [],
-    "certificates": [],
-    "enrolledCourses": [
-      10,
-      99999,
-      12
-    ],
-    "progress": [
-      {
-        "Complete": true,
-        "lessonId": 1,
-        "courseId": 99999
-      },
-      {
-        "Complete": true,
-        "lessonId": 1,
-        "courseId": 10
-      },
-      {
-        "Complete": true,
-        "lessonId": 1,
-        "courseId": 12
-      }
-    ],
-    "userId": 9454,
-    "email": "m0@gmail.com",
-    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "username": "mohamed"
   },
   {
     "role": "Admin",
@@ -246,48 +180,6 @@
     "username": "malak"
   },
   {
-    "role": "student",
-    "quizAttempts": [
-      {
-        "attemptNumber": 1,
-        "score": 2,
-        "totalQuestions": 2,
-        "lessonID": 1,
-        "passed": true
-      },
-      {
-        "attemptNumber": 1,
-        "score": 2,
-        "totalQuestions": 3,
-        "lessonID": 2,
-        "passed": true
-      }
-    ],
-    "certificates": [{
-      "studentId": 9459,
-      "certificateId": "CERT-99999-9459",
-      "issueDate": "2025-11-24",
-      "courseId": 99999
-    }],
-    "enrolledCourses": [99999],
-    "progress": [
-      {
-        "Complete": true,
-        "lessonId": 1,
-        "courseId": 99999
-      },
-      {
-        "Complete": true,
-        "lessonId": 2,
-        "courseId": 99999
-      }
-    ],
-    "userId": 9459,
-    "email": "z@.",
-    "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
-    "username": "z"
-  },
-  {
     "role": "Admin",
     "userId": 9460,
     "email": "jj@.",
@@ -330,5 +222,47 @@
     "email": "ra@gmail.com",
     "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
     "username": "ranaaaa"
+  },
+  {
+    "role": "student",
+    "quizAttempts": [
+      {
+        "attemptNumber": 1,
+        "score": 2,
+        "totalQuestions": 2,
+        "lessonID": 1,
+        "passed": true
+      },
+      {
+        "attemptNumber": 1,
+        "score": 2,
+        "totalQuestions": 2,
+        "lessonID": 2,
+        "passed": true
+      }
+    ],
+    "certificates": [{
+      "studentId": 9462,
+      "certificateId": "CERT-99999-9462",
+      "issueDate": "2025-11-24",
+      "courseId": 99999
+    }],
+    "enrolledCourses": [99999],
+    "progress": [
+      {
+        "Complete": true,
+        "lessonId": 1,
+        "courseId": 99999
+      },
+      {
+        "Complete": true,
+        "lessonId": 2,
+        "courseId": 99999
+      }
+    ],
+    "userId": 9462,
+    "email": "z@.",
+    "passwordHash": "d17f25ecfbcc7857f7bebea469308be0b2580943e96d13a3ad98a13675c4bfc2",
+    "username": "zzzz"
   }
 ]

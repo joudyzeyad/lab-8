@@ -107,6 +107,9 @@ public class StudentManager {
         int max =0;
         int total=0;
           ArrayList<QuizAttempt> q = s.getQuizAttempts();
+          if(q== null){
+              return 0f;
+          }
           for(QuizAttempt temp: q){
              if(temp.getLessonID()== id){
                  total = temp.getTotalQuestions();
@@ -114,6 +117,8 @@ public class StudentManager {
                      max = temp.getScore();
              }
           }
+          if(total == 0)
+              return 0f;
           float percent = (max * 100f)/ total;
           return percent;
     }
